@@ -14,10 +14,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser())
 
-app.use('/api/v1/users', userRou)
+app.use('/api/v1/user', userRou)
 app.use('/', homeRou)
 // Static Route
 app.use(express.static('public'))
+app.use('/api/docs', express.static('docs/apidoc'))
+// app.use(express.static('src/doc'))
 
 app.use(errorCtr.sendError);
 

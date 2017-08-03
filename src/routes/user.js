@@ -12,6 +12,7 @@ router.use(function timeLog (req, res, next) {
 //   res.json({users: [{name: 'Timmy Change 2'}]});
 // });
 
-router.get('/', userCtr.index);
+router.get('/list', userCtr.index);
+router.post('/login', userCtr.login);
 
 module.exports = router;

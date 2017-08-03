@@ -1,0 +1,3 @@
+#RUN:
+apidoc -i src/ -o docs/apidoc/
+apidoc -i src/ -o docs/apidoc/ -t docs/mytemplate/
