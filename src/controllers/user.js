@@ -1,5 +1,6 @@
-const User = require('../models').User;
+const user = require('../models').user;
 
+const _c = require('../core/index');
 /**
 @api {post} api/v1/user/login Request User login
 @apiName UserLogin
@@ -16,8 +17,9 @@ const User = require('../models').User;
     }
 */
 exports.login = (req, res) => {
-  console.log(req.params, req.query, req.body);
-  res.json({data: 'ok'});
+  user.findOne({ where: {username: 'david', password: '123'} }).then(user => {
+      _c.res.send(res, user);
+  });
 };
 
 /**
@@ -32,12 +34,13 @@ exports.login = (req, res) => {
     {
       status: 'success',
       data: [
-           "fullName": "David Nguyen"
+           "fullName": "David Nguyen",
+           ...
        ]
     }
 */
 exports.index = (req, res) => {
-  User.findAll().then(result => {
+  user.findAll().then(result => {
     res.json({data: result});
   })
 };
