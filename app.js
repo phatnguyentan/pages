@@ -6,13 +6,21 @@ let bodyParser = require('body-parser');
 let userRou = require('./src/routes/user');
 let homeRou = require('./src/routes/home');
 let errorCtr = require('./src/controllers/error');
-let debug = require('debug')('api_ecommerce:server');
+const _c = require('./src/core');
+let debug = require('debug')('all:server');
+const session = require('express-session');
 
 let app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
+
+app.use(session({
+  secret: 'ecommerce',
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.use('/api/v1/user', userRou)
 app.use('/', homeRou)

@@ -3,7 +3,7 @@
     "type": "get",
     "url": "api/v1/user/list",
     "title": "Request Users information",
-    "name": "GetUsers",
+    "name": "GetListUsers",
     "group": "User",
     "sampleRequest": [
       {
@@ -14,7 +14,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  status: 'success',\n  data: [\n       \"firstName\": \"John\",\n       \"lastLame\": \"Doe\"\n   ]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  status: 'success',\n  data: [\n       \"fullName\": \"David Nguyen\",\n       ...\n   ]\n}",
           "type": "json"
         }
       ]
@@ -58,7 +58,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n   status: 'success',\n   data: [\n\n   ]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n   status: 'success'\n}",
           "type": "json"
         }
       ]

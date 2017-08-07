@@ -1,6 +1,6 @@
 const user = require('../models').user;
 
-const _c = require('../core/index');
+const _c = require('../core');
 /**
 @api {post} api/v1/user/login Request User login
 @apiName UserLogin
@@ -17,6 +17,7 @@ const _c = require('../core/index');
     }
 */
 exports.login = (req, res) => {
+  console.log(req.session);
   user.findOne({ where: {username: 'david', password: '123'} }).then(user => {
       _c.res.send(res, user);
   });
