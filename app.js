@@ -19,7 +19,8 @@ app.use(cookieParser())
 app.use(session({
   secret: 'ecommerce',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { secure: true }
 }))
 
 app.use('/api/v1/user', userRou)
@@ -29,6 +30,6 @@ app.use(express.static('public'))
 app.use('/api/docs', express.static('docs/apidoc'))
 // app.use(express.static('src/doc'))
 
-app.use(errorCtr.sendError);
+// app.use(errorCtr.sendError);
 
 module.exports = app;

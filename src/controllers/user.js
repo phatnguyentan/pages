@@ -1,47 +1,82 @@
-const user = require('../models').user;
+const models = require('../models');
 
 const _c = require('../core');
 /**
-@api {post} api/v1/user/login Request User login
+@api {post} /api/v1/user/login Request User login
 @apiName UserLogin
-@apiGroup User
+@apiGroup Guest
 
-@apiParam {String} [username]  Mandatory username.
-@apiParam {String} [password]  Mandatory password.
+@apiParam {String}  username=david Mandatory username.
+@apiParam {String}  password=123 Mandatory password.
 @apiSampleRequest http://localhost:8000/api/v1/user/login
-
-@apiSuccessExample Success-Response:
-    HTTP/1.1 200 OK
-    {
-       status: 'success'
-    }
 */
 exports.login = (req, res) => {
-  console.log(req.session);
-  user.findOne({ where: {username: 'david', password: '123'} }).then(user => {
-      _c.res.send(res, user);
+  models.user.findOne({ where: {username: req.body.username, password: req.body.password}, include: [{ model: models.session, as: 'sessions'}]}).then(user => {
+    if(user) {
+      _c.auth.generateToken(user.username, user.password, token => {
+        models.session.findOrCreate({ where: {token: token, userId: user.id }}).spread((result, created) => {
+          _c.res.send(res, token);
+        });
+      })
+    } else {
+      _c.res.sendFail(res, "Username or Password is not correct");
+    }
   });
 };
 
 /**
-@api {get} api/v1/user/list Request Users information
+@api {post} /api/v1/user/signup Create User
+@apiName UserSignUp
+@apiGroup Guest
+
+@apiParam {String}  username=tom Mandatory username.
+@apiParam {String}  password=123 Mandatory password.
+@apiSampleRequest http://localhost:8000/api/v1/user/signup
+*/
+exports.signup = (req, res) => {
+  models.user.findOne({ where: {username: req.body.username}}).then(user => {
+    if(user) {
+      _c.res.sendFail(res, "Username is registerd");
+    } else {
+      models.user.create({username: req.body.username, password: req.body.password}).then((user) => {
+        _c.auth.generateToken(user.username, user.password, token => {
+          models.session.findOrCreate({ where: {token: token, userId: user.id }}).spread((session, created) => {
+            _c.res.send(res, session);
+          });
+        })
+      });
+    }
+  });
+};
+
+/**
+@api {get} /api/v1/user/list Request Users information
 @apiName GetListUsers
 @apiGroup User
-
+@apiHeader {String} Authorization ="Basic ZGF2aWQ6MTIz" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/user/list
-
-@apiSuccessExample Success-Response:
-    HTTP/1.1 200 OK
-    {
-      status: 'success',
-      data: [
-           "fullName": "David Nguyen",
-           ...
-       ]
-    }
 */
 exports.index = (req, res) => {
-  user.findAll().then(result => {
-    res.json({data: result});
+  models.user.findAll().then(result => {
+    _c.res.send(res, result);
   })
+};
+
+/**
+@api {post} /api/v1/user/logout Request User logout
+@apiName User Logout
+@apiGroup User
+@apiHeader {String} Authorization ="Basic ZGF2aWQ6MTIz" Basic Access Authentication token.
+@apiSampleRequest http://localhost:8000/api/v1/user/logout
+*/
+exports.logout = (req, res) => {
+  let token = _c.auth.getToken(req.headers.authorization, token => {
+    if (!token) {
+      _c.res.sendSuccess(res);
+    } else {
+      models.session.destroy({ where: {token: token}}).then((result) => {
+        _c.res.sendSuccess(res);
+      });
+    }
+  });
 };

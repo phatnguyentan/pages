@@ -7,7 +7,7 @@ module.exports = {
       {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
         userId: {type: Sequelize.INTEGER, foreignKey: true},
-        sessionId: Sequelize.STRING,
+        token: Sequelize.STRING,
         createdAt: { allowNull: false, type: Sequelize.DATE },
         updatedAt: { allowNull: false, type: Sequelize.DATE }
       },

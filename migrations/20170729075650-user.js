@@ -11,16 +11,10 @@ module.exports = {
           autoIncrement: true
         },
         fullName: Sequelize.STRING,
-        username: Sequelize.STRING,
+        username: { type: Sequelize.STRING, unique: 'compositeIndex' },
         password: Sequelize.STRING,
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        }
+        createdAt: { allowNull: false, type: Sequelize.DATE },
+        updatedAt: { allowNull: false, type: Sequelize.DATE }
       },
       {
         timestamps: true,
