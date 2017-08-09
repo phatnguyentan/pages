@@ -13,6 +13,7 @@ exports.auth = (req, res, next) => {
           _c.auth.getProfile(token, (username, password) => {
             models.user.findOne({where: {username: username, password: password}}).then(data => {
               if (data) {
+                req.current_user = data;
                 next();
               } else {
                 _c.res.loginRequire(res);
@@ -23,7 +24,6 @@ exports.auth = (req, res, next) => {
           _c.res.loginRequire(res);
         }
       });
-
     }
   });
 };

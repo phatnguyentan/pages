@@ -3,15 +3,11 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     queryInterface.createTable(
-      'users',
+      'products',
       {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true
-        },
-        username: { type: Sequelize.STRING },
-        password: Sequelize.STRING,
+        id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+        title: {type: Sequelize.STRING, allowNull: false},
+        description: Sequelize.STRING,
         createdAt: { allowNull: false, type: Sequelize.DATE },
         updatedAt: { allowNull: false, type: Sequelize.DATE }
       },
@@ -20,12 +16,7 @@ module.exports = {
         engine: 'MYISAM',                     // default: 'InnoDB'
         charset: 'utf-8'                    // default: null, latin1
       }
-    ).then(function() {
-      return queryInterface.addConstraint('users', ['username'], {
-        type: 'unique',
-        name: 'unique_constraint_username'
-      });
-    });
+    )
   },
 
   down: function (queryInterface, Sequelize) {

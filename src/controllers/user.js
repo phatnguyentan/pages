@@ -6,7 +6,7 @@ const _c = require('../core');
 @apiName UserLogin
 @apiGroup Guest
 
-@apiParam {String}  username=david Mandatory username.
+@apiParam {String}  username=test Mandatory username.
 @apiParam {String}  password=123 Mandatory password.
 @apiSampleRequest http://localhost:8000/api/v1/user/login
 */
@@ -15,7 +15,7 @@ exports.login = (req, res) => {
     if(user) {
       _c.auth.generateToken(user.username, user.password, token => {
         models.session.findOrCreate({ where: {token: token, userId: user.id }}).spread((result, created) => {
-          _c.res.send(res, token);
+          _c.res.send(res, result);
         });
       })
     } else {
@@ -53,7 +53,7 @@ exports.signup = (req, res) => {
 @api {get} /api/v1/user/list Request Users information
 @apiName GetListUsers
 @apiGroup User
-@apiHeader {String} Authorization ="Basic ZGF2aWQ6MTIz" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/user/list
 */
 exports.index = (req, res) => {
@@ -66,13 +66,13 @@ exports.index = (req, res) => {
 @api {post} /api/v1/user/logout Request User logout
 @apiName User Logout
 @apiGroup User
-@apiHeader {String} Authorization ="Basic ZGF2aWQ6MTIz" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/user/logout
 */
 exports.logout = (req, res) => {
   let token = _c.auth.getToken(req.headers.authorization, token => {
     if (!token) {
-      _c.res.sendSuccess(res);
+      _c.res.sendFail(res, 'Please put Authorization');
     } else {
       models.session.destroy({ where: {token: token}}).then((result) => {
         _c.res.sendSuccess(res);

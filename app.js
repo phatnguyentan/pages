@@ -4,7 +4,7 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 
 let userRou = require('./src/routes/user');
-let homeRou = require('./src/routes/home');
+let productRou = require('./src/routes/product');
 let errorCtr = require('./src/controllers/error');
 const _c = require('./src/core');
 let debug = require('debug')('all:server');
@@ -24,7 +24,7 @@ app.use(session({
 }))
 
 app.use('/api/v1/user', userRou)
-app.use('/', homeRou)
+app.use('/api/v1/product', productRou)
 // Static Route
 app.use(express.static('public'))
 app.use('/api/docs', express.static('docs/apidoc'))

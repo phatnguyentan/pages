@@ -13,7 +13,7 @@
             "type": "String",
             "optional": false,
             "field": "username",
-            "defaultValue": "david",
+            "defaultValue": "test",
             "description": "<p>Mandatory username.</p>"
           },
           {
@@ -75,6 +75,35 @@
   },
   {
     "type": "get",
+    "url": "/api/v1/product/list",
+    "title": "Request Product List",
+    "name": "Product_List",
+    "group": "Product",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Basic dGVzdDoxMjM=",
+            "description": "<p>Basic Access Authentication token.</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8000/api/v1/product/list"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controllers/product.js",
+    "groupTitle": "Product"
+  },
+  {
+    "type": "get",
     "url": "/api/v1/user/list",
     "title": "Request Users information",
     "name": "GetListUsers",
@@ -87,7 +116,7 @@
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic ZGF2aWQ6MTIz",
+            "defaultValue": "Basic dGVzdDoxMjM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -116,7 +145,7 @@
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic ZGF2aWQ6MTIz",
+            "defaultValue": "Basic dGVzdDoxMjM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
