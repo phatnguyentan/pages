@@ -3,10 +3,10 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     queryInterface.createTable(
-      'product_users',
+      'users_pages',
       {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-        productId: { type: Sequelize.INTEGER, foreignKey: true},
+        pageId: { type: Sequelize.INTEGER, foreignKey: true},
         userId: { type: Sequelize.INTEGER, foreignKey: true },
         createdAt: { allowNull: false, type: Sequelize.DATE },
         updatedAt: { allowNull: false, type: Sequelize.DATE }

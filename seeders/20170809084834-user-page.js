@@ -2,9 +2,9 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('product_users',[
+    return queryInterface.bulkInsert('users_pages',[
       {
-        productId: 1,
+        pageId: 1,
         userId: 1,
         createdAt: new Date(),
         updatedAt: new Date()

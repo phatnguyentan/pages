@@ -1,0 +1,28 @@
+let express = require('express');
+let router = express.Router();
+let authen = require('../services/authenticate');
+const models = require('../models');
+const _c = require('../core');
+
+/**
+@api {post} /api/v1/tag/create Create Tag
+@apiName Create Tag
+@apiGroup Tag
+@apiParam {String}  itemId=1 Mandatory type.
+@apiParam {String}  name=working Mandatory type.
+@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiSampleRequest http://localhost:8000/api/v1/tag/create
+*/
+router.post('/create', authen.auth, (req, res) => {
+  models.item.findOne({where: {id: req.body.itemId}}).then(item => {
+    if(item) {
+      models.tag.create({name: req.body.name, itemId: req.body.itemId, userId: req.currentUser.id}).then(tag => {
+        _c.res.send(res, tag);
+      });
+    } else {
+      _c.res.sendFail(res, 'Item is not exist');
+    }
+  });
+});
+
+module.exports = router;

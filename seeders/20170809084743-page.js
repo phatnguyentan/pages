@@ -2,10 +2,10 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('products',[
+    return queryInterface.bulkInsert('pages',[
       {
-        title: 'Test Product',
-        description: 'DeviantArt and Adobe are proud to present the fascinating ways three industry leaders use stock photography in their creative process from start to finish',
+        name: 'David Note',
+        type: 'note',
         createdAt: new Date(),
         updatedAt: new Date()
       }

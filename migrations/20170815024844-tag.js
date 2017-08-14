@@ -3,11 +3,12 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     queryInterface.createTable(
-      'products',
+      'tags',
       {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-        title: {type: Sequelize.STRING, allowNull: false},
-        description: Sequelize.STRING,
+        itemId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
+        userId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
+        name: {allowNull: false, type: Sequelize.STRING},
         createdAt: { allowNull: false, type: Sequelize.DATE },
         updatedAt: { allowNull: false, type: Sequelize.DATE }
       },

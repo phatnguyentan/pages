@@ -4,7 +4,6 @@ const session = require('../models').session;
 module.exports = function(sequelize, DataTypes) {
   let user = sequelize.define('user', {
     username: DataTypes.STRING,
-    fullname: DataTypes.STRING,
     password: DataTypes.STRING,
   }, {
     classMethods: {
@@ -15,7 +14,8 @@ module.exports = function(sequelize, DataTypes) {
   });
   user.associate = function (models) {
    user.hasMany(models.session, {as: 'sessions'});
-   user.belongsToMany(models.product, {through: 'product_users'});
+   user.belongsToMany(models.page, {through: 'users_pages'});
+   user.hasMany(models.item);
   }
   return user;
 };

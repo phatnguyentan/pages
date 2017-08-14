@@ -4,8 +4,10 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 
 let userRou = require('./src/routes/user');
-let productRou = require('./src/routes/product');
-let errorCtr = require('./src/controllers/error');
+let pageRou = require('./src/routes/page');
+let itemRou = require('./src/routes/item');
+let tagRou = require('./src/routes/tag');
+let error = require('./src/services/error');
 const _c = require('./src/core');
 let debug = require('debug')('all:server');
 const session = require('express-session');
@@ -24,12 +26,14 @@ app.use(session({
 }))
 
 app.use('/api/v1/user', userRou)
-app.use('/api/v1/product', productRou)
+app.use('/api/v1/page', pageRou)
+app.use('/api/v1/item', itemRou)
+app.use('/api/v1/tag', tagRou)
 // Static Route
 app.use(express.static('public'))
 app.use('/api/docs', express.static('docs/apidoc'))
 // app.use(express.static('src/doc'))
 
-// app.use(errorCtr.sendError);
+// app.use(error.sendError);
 
 module.exports = app;

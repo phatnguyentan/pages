@@ -3,11 +3,12 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     queryInterface.createTable(
-      'product_images',
+      'items',
       {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-        productId: { type: Sequelize.INTEGER, foreignKey: true},
-        imageId: { type: Sequelize.INTEGER, foreignKey: true },
+        pageId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
+        userId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
+        values: Sequelize.JSONB,
         createdAt: { allowNull: false, type: Sequelize.DATE },
         updatedAt: { allowNull: false, type: Sequelize.DATE }
       },

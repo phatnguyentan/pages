@@ -3,11 +3,12 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     queryInterface.dropTable('users');
-    queryInterface.dropTable('sesions');
-    queryInterface.dropTable('products');
+    queryInterface.dropTable('sessions');
+    queryInterface.dropTable('pages');
     queryInterface.dropTable('images');
-    queryInterface.dropTable('product_image');
-    queryInterface.dropTable('product_user');
+    queryInterface.dropTable('users_pages');
+    queryInterface.dropTable('items');
+    queryInterface.dropTable('tags');
   },
 
   down: function (queryInterface, Sequelize) {
