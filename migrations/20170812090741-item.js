@@ -6,9 +6,9 @@ module.exports = {
       'items',
       {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-        pageId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
         userId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
-        values: Sequelize.JSONB,
+        title: Sequelize.STRING,
+        description: Sequelize.TEXT,
         createdAt: { allowNull: false, type: Sequelize.DATE },
         updatedAt: { allowNull: false, type: Sequelize.DATE }
       },

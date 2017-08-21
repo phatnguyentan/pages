@@ -11,10 +11,12 @@ let error = require('./src/services/error');
 const _c = require('./src/core');
 let debug = require('debug')('all:server');
 const session = require('express-session');
+let cors = require('cors');
 
 let app = express();
 
-app.use(bodyParser.json());
+app.use(cors())
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 

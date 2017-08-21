@@ -5,7 +5,6 @@ module.exports = {
     return queryInterface.bulkInsert('tags',[
       {
         userId: 1,
-        itemId: 1,
         name: "working",
         createdAt: new Date(),
         updatedAt: new Date()

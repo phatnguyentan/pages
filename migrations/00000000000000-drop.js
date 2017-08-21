@@ -8,6 +8,7 @@ module.exports = {
     queryInterface.dropTable('images');
     queryInterface.dropTable('users_pages');
     queryInterface.dropTable('items');
+    queryInterface.dropTable('pages_items');
     queryInterface.dropTable('tags');
   },
 

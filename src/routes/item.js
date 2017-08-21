@@ -3,18 +3,20 @@ let router = express.Router();
 let authen = require('../services/authenticate');
 const models = require('../models');
 const _c = require('../core');
+const htmlencode = require('htmlencode');
 
 /**
 @api {post} /api/v1/item/create Create Item
 @apiName Create Item
 @apiGroup Item
-@apiParam {String}  pageId=1 Mandatory type.
-@apiParam {Json}  values="{name: test}" Mandatory type.
+@apiParam {String}  title="test" Mandatory type.
+@apiParam {String}  description="description test" Mandatory type.
 @apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/item/create
 */
 router.post('/create', authen.auth, (req, res) => {
-  models.item.create({values: req.body.values, pageId: req.body.pageId, userId: req.currentUser.id}).then(item => {
+  let text = htmlencode.htmlEncode(req.body.description)
+  models.item.create({title: req.body.title, description: text, userId: req.currentUser.id}).then(item => {
     _c.res.send(res, item);
   });
 });

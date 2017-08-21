@@ -3,7 +3,8 @@ const session = require('../models').session;
 
 module.exports = function(sequelize, DataTypes) {
   let item = sequelize.define('item', {
-    values: DataTypes.JSONB,
+    title: DataTypes.STRING,
+    description: DataTypes.TEXT,
     pageId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {
