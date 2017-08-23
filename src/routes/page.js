@@ -60,7 +60,7 @@ router.post('/delete', authen.auth, (req, res) => {
 */
 router.get('/detail/:pageId', authen.auth, (req, res) => {
   // console.log(req.query, req.params, req.body);
-  req.currentUser.getPages({where: {id: req.params.pageId}, include: [{ model: models.item, as: 'items'}]}).then(data => {
+  req.currentUser.getPages({where: {id: req.params.pageId}}).then(data => {
     _c.res.send(res, data);
   });
 });

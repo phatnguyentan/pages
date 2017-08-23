@@ -75,10 +75,24 @@
   },
   {
     "type": "post",
-    "url": "/api/v1/item/create",
-    "title": "Create Item",
-    "name": "Create_Item",
+    "url": "/api/v1/item/add-page",
+    "title": "Add to Page",
+    "name": "Add_to_Page",
     "group": "Item",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Basic dGVzdDoxMjM=",
+            "description": "<p>Basic Access Authentication token.</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -92,10 +106,47 @@
           },
           {
             "group": "Parameter",
-            "type": "Json",
+            "type": "String",
             "optional": false,
-            "field": "values",
-            "defaultValue": "{name: test}",
+            "field": "itemId",
+            "defaultValue": "1",
+            "description": "<p>Mandatory type.</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8000/api/v1/item/add-page"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/routes/item.js",
+    "groupTitle": "Item"
+  },
+  {
+    "type": "post",
+    "url": "/api/v1/item/create",
+    "title": "Create Item",
+    "name": "Create_Item",
+    "group": "Item",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "defaultValue": "test",
+            "description": "<p>Mandatory type.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "defaultValue": "description test",
             "description": "<p>Mandatory type.</p>"
           }
         ]
@@ -147,6 +198,35 @@
     "sampleRequest": [
       {
         "url": "http://localhost:8000/api/v1/item/detail/1"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/routes/item.js",
+    "groupTitle": "Item"
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/item/list/:pageId",
+    "title": "List Item By Page",
+    "name": "List_Item",
+    "group": "Item",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Basic dGVzdDoxMjM=",
+            "description": "<p>Basic Access Authentication token.</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8000/api/v1/item/list/1"
       }
     ],
     "version": "0.0.0",

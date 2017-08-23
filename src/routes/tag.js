@@ -16,8 +16,12 @@ const _c = require('../core');
 router.post('/create', authen.auth, (req, res) => {
   models.item.findOne({where: {id: req.body.itemId}}).then(item => {
     if(item) {
-      models.tag.create({name: req.body.name, itemId: req.body.itemId, userId: req.currentUser.id}).then(tag => {
-        _c.res.send(res, tag);
+      models.tag.findOrCreate({where: {name: req.body.name}}).spread((tag, created) => {
+        item.addTag(tag).then(relation => {
+          req.currentUser.addTag(tag).then(relation => {
+            _c.res.send(res, tag);
+          });
+        });
       });
     } else {
       _c.res.sendFail(res, 'Item is not exist');

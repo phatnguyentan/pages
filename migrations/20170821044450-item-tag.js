@@ -8,6 +8,8 @@ module.exports = {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
         itemId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
         tagId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
+        createdAt: { allowNull: false, type: Sequelize.DATE },
+        updatedAt: { allowNull: false, type: Sequelize.DATE }
       },
       {
         timestamps: true,

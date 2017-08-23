@@ -3,8 +3,6 @@ const session = require('../models').session;
 
 module.exports = function(sequelize, DataTypes) {
   let tag = sequelize.define('tag', {
-    itemId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
     name: DataTypes.STRING
   }, {
     classMethods: {
@@ -14,7 +12,8 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
   tag.associate = function (models) {
-   tag.belongsTo(models.item);
+   tag.belongsToMany(models.item, {through: 'items_tags'});
+   tag.belongsToMany(models.user, {through: 'users_tags'});
   }
   return tag;
 };

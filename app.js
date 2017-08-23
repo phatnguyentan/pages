@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 app.use(session({
-  secret: 'ecommerce',
+  secret: 'pages',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: true }

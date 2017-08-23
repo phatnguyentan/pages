@@ -2,7 +2,7 @@
   "development": {
     "username": "auth-server",
     "password": "Password",
-    "database": "ecommerce",
+    "database": "pages",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

@@ -3,10 +3,11 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     queryInterface.createTable(
-      'tags',
+      'users_tags',
       {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-        name: {allowNull: false, type: Sequelize.STRING},
+        userId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
+        tagId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
         createdAt: { allowNull: false, type: Sequelize.DATE },
         updatedAt: { allowNull: false, type: Sequelize.DATE }
       },
@@ -15,12 +16,7 @@ module.exports = {
         engine: 'MYISAM',                     // default: 'InnoDB'
         charset: 'utf-8'                    // default: null, latin1
       }
-    ).then(function() {
-      return queryInterface.addConstraint('tags', ['name'], {
-        type: 'unique',
-        name: 'unique_constraint_tag_name'
-      });
-    });
+    )
   },
 
   down: function (queryInterface, Sequelize) {

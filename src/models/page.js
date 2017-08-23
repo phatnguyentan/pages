@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
   });
   page.associate = function (models) {
    page.belongsToMany(models.user, {through: 'users_pages'});
-   page.hasMany(models.item);
+   page.belongsToMany(models.item, {through: 'pages_items'});
   }
   return page;
 };

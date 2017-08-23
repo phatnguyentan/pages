@@ -1,12 +1,12 @@
 {
-  "name": "api_ecommerce",
+  "name": "pages",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "apidoc": {
-    "title": "Ecommerce Testing",
+    "title": "Pages Docs",
     "url": "http://localhost:8000"
   },
   "dependencies": {

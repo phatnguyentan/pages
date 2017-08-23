@@ -1,7 +1,7 @@
 define({
   "title": "Custom apiDoc browser title",
   "url": "http://localhost:8000/api/",
-  "name": "api_ecommerce",
+  "name": "api_pages",
   "version": "0.0.0",
   "description": "",
   "sampleUrl": false,

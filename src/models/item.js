@@ -5,7 +5,6 @@ module.exports = function(sequelize, DataTypes) {
   let item = sequelize.define('item', {
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
-    pageId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {
     classMethods: {
@@ -15,9 +14,9 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
   item.associate = function (models) {
-   item.belongsTo(models.page);
+   item.belongsToMany(models.page, {through: 'pages_items'});
    item.belongsTo(models.user);
-   item.hasMany(models.tag);
+   item.belongsToMany(models.tag, {through: 'items_tags'});
   }
   return item;
 };
