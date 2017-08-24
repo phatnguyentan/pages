@@ -3,14 +3,14 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     queryInterface.createTable(
-      'items',
+      'item_links',
       {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-        userId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
+        itemId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
+        link: Sequelize.STRING,
         title: Sequelize.STRING,
-        privacy: Sequelize.STRING,
-        type: Sequelize.STRING,
-        description: Sequelize.TEXT,
+        description: Sequelize.STRING,
+        thumbnail: Sequelize.STRING,
         createdAt: { allowNull: false, type: Sequelize.DATE },
         updatedAt: { allowNull: false, type: Sequelize.DATE }
       },

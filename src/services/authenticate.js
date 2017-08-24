@@ -27,3 +27,28 @@ exports.auth = (req, res, next) => {
     }
   });
 };
+
+exports.getUser = (req, res, next) => {
+  let token = _c.auth.getToken(req.headers.authorization, token => {
+    if (!token) {
+      next()
+    } else {
+      models.session.findOne({ where: {token: token}}).then((result) => {
+        if (result) {
+          _c.auth.getProfile(token, (username, password) => {
+            models.user.findOne({where: {username: username, password: password}}).then(data => {
+              if (data) {
+                req.currentUser = data;
+                next()
+              } else {
+                next()
+              }
+            });
+          })
+        } else {
+          next()
+        }
+      });
+    }
+  });
+};

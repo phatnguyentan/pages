@@ -148,6 +148,14 @@
             "field": "description",
             "defaultValue": "description test",
             "description": "<p>Mandatory type.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "privacy",
+            "defaultValue": "public",
+            "description": "<p>Mandatory type.</p>"
           }
         ]
       }
@@ -226,7 +234,36 @@
     },
     "sampleRequest": [
       {
-        "url": "http://localhost:8000/api/v1/item/list/1"
+        "url": "http://localhost:8000/api/v1/item/list/1?page=1&per=10"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/routes/item.js",
+    "groupTitle": "Item"
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/item/list-home",
+    "title": "List Item Home Page",
+    "name": "List_Item_Home_Page",
+    "group": "Item",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Basic dGVzdDoxMjM=",
+            "description": "<p>Basic Access Authentication token.</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8000/api/v1/item/list-home"
       }
     ],
     "version": "0.0.0",
@@ -275,6 +312,92 @@
     "version": "0.0.0",
     "filename": "src/routes/item.js",
     "groupTitle": "Item"
+  },
+  {
+    "type": "post",
+    "url": "/api/v1/item-link/create/:itemId",
+    "title": "Create Item Link",
+    "name": "Create_Item_Link",
+    "group": "Item_Link",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Basic dGVzdDoxMjM=",
+            "description": "<p>Basic Access Authentication token.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "link",
+            "defaultValue": "https://nodejs.org/api/documentation.html",
+            "description": "<p>Mandatory type.</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8000/api/v1/item-link/create/1"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/routes/item-link.js",
+    "groupTitle": "Item_Link"
+  },
+  {
+    "type": "post",
+    "url": "/api/v1/item-link/delete",
+    "title": "Delete Item Link",
+    "name": "Delete_Item_Link",
+    "group": "Item_Link",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Basic dGVzdDoxMjM=",
+            "description": "<p>Basic Access Authentication token.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "linkId",
+            "defaultValue": "1",
+            "description": "<p>Mandatory type.</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8000/api/v1/item-link/delete"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/routes/item-link.js",
+    "groupTitle": "Item_Link"
   },
   {
     "type": "post",

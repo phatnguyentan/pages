@@ -7,6 +7,8 @@ let userRou = require('./src/routes/user');
 let pageRou = require('./src/routes/page');
 let itemRou = require('./src/routes/item');
 let tagRou = require('./src/routes/tag');
+let itemLinkRou = require('./src/routes/item-link');
+
 let error = require('./src/services/error');
 const _c = require('./src/core');
 let debug = require('debug')('all:server');
@@ -31,6 +33,8 @@ app.use('/api/v1/user', userRou)
 app.use('/api/v1/page', pageRou)
 app.use('/api/v1/item', itemRou)
 app.use('/api/v1/tag', tagRou)
+app.use('/api/v1/item-link', itemLinkRou)
+
 // Static Route
 app.use(express.static('public'))
 app.use('/api/docs', express.static('docs/apidoc'))

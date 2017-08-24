@@ -4,6 +4,7 @@ const session = require('../models').session;
 module.exports = function(sequelize, DataTypes) {
   let item = sequelize.define('item', {
     title: DataTypes.STRING,
+    privacy: DataTypes.STRING,
     description: DataTypes.TEXT,
     userId: DataTypes.INTEGER
   }, {
@@ -17,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
    item.belongsToMany(models.page, {through: 'pages_items'});
    item.belongsTo(models.user);
    item.belongsToMany(models.tag, {through: 'items_tags'});
+   item.hasMany(models.item_link, {as: "itemLinks"});
   }
   return item;
 };

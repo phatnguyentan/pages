@@ -11,19 +11,37 @@ const htmlencode = require('htmlencode');
 @apiName List Item
 @apiGroup Item
 @apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
-@apiSampleRequest http://localhost:8000/api/v1/item/list/1
+@apiSampleRequest http://localhost:8000/api/v1/item/list/1?page=1&per=10
 */
-router.get('/list/:pageId', authen.auth, (req, res) => {
+router.get('/list/:pageId', authen.auth, (req, res, next) => {
   models.page.findOne({where : {id: req.params.pageId}}).then(page => {
     if (page) {
-      page.getItems().then(items => {
-        _c.res.send(res, items);
+      page.getItems(_c.req.paginate(req)).then(items => {
+        _c.res.send(res, items)
       })
     } else {
       _c.res.sendFail(res, 'page_not_found')
     }
-
   });
+});
+
+/**
+@api {get} /api/v1/item/list-home List Item Home Page
+@apiName List Item Home Page
+@apiGroup Item
+@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiSampleRequest http://localhost:8000/api/v1/item/list-home
+*/
+router.get('/list-home', authen.getUser, (req, res) => {
+  if (req.currentUser) {
+    models.item.findAll(_c.req.paginate(req, {where : {$or: [{userId: req.currentUser.id}, {type: "system"} ]}})).then(items => {
+      _c.res.send(res, items)
+    })
+  } else {
+    models.item.findAll(_c.req.paginate(req, {where : {type: "system"}})).then(items => {
+      _c.res.send(res, items)
+    })
+  }
 });
 
 /**
@@ -32,12 +50,13 @@ router.get('/list/:pageId', authen.auth, (req, res) => {
 @apiGroup Item
 @apiParam {String}  title="test" Mandatory type.
 @apiParam {String}  description="description test" Mandatory type.
+@apiParam {String}  privacy="public" Mandatory type.
 @apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/item/create
 */
 router.post('/create', authen.auth, (req, res) => {
   let text = htmlencode.htmlEncode(req.body.description)
-  models.item.create({title: req.body.title, description: text, userId: req.currentUser.id}).then(item => {
+  models.item.create({title: req.body.title, description: text, userId: req.currentUser.id, privacy: req.body.privacy}).then(item => {
     _c.res.send(res, item);
   });
 });
@@ -74,7 +93,7 @@ router.post('/update/:itemId', authen.auth, (req, res) => {
 @apiSampleRequest http://localhost:8000/api/v1/item/detail/1
 */
 router.post('/detail/:itemId', authen.auth, (req, res) => {
-  req.currentUser.getItems({ where: { id: req.params.itemId }, include: [{model: models.tag}]}).then(item => {
+  req.currentUser.getItems({ where: { id: req.params.itemId }, include: [{model: models.tag}, {model: models.item_link, as: "itemLinks"}]}).then(item => {
     _c.res.send(res, item);
   });
 });
