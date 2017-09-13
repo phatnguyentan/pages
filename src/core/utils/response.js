@@ -20,6 +20,10 @@ module.exports = {
 
   loginRequire: function(res, message = "User should login", callback = null) {
     res.json({status: 'fail', message: message})
+  },
+
+  render: function(res, path, data) {
+    res.render('shared/templates/index', { path: path, data: data})
   }
 }
 

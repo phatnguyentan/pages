@@ -1,8 +1,8 @@
 let express = require('express');
 let router = express.Router();
-let authen = require('../services/authenticate');
-const models = require('../models');
-const _c = require('../core');
+let authen = require('../../services/authenticate');
+const models = require('../../models');
+const _c = require('../../core');
 const htmlencode = require('htmlencode');
 
 
