@@ -1,5 +1,18 @@
 <!DOCTYPE html>
 html(lang='en')
-  include ../../header/header
+  head
+    title=title
+    block style
+      link(href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet")
+    block scripts
+      script(src='vendor/jquery/jquery.min.js')
+    style
+      include ../../../../public/css/style.css
+  //- Body
   include ../../body/body
+  //- Footer
+  div(class="border-lightest container ul-unstyle")
+    ul
+      li About
+
   

@@ -2,16 +2,37 @@ body {
     padding-top: 54px;
 }
 
+p {
+  font-size: 14px;
+}
+
+.a-unstyle, .a-unstyle:hover, .a-unstyle:focus {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.ul-unstyle ul li {
+ padding: 0;
+ margin: 0;
+ list-style: none;
+}
+
+
+.space-10 {
+  margin: 10px;
+}
+
+.border-lightest {
+    border-top: 1px solid rgba(0,0,0,.05);
+}
+
+.post-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 @media (min-width: 992px) {
     body {
         padding-top: 56px;
     }
-}
-
-.portfolio-item {
-    margin-bottom: 30px;
-}
-
-.pagination {
-    margin-bottom: 30px;
 }
