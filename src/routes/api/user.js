@@ -4,12 +4,6 @@ let authen = require('../../services/authenticate');
 const models = require('../../models');
 const _c = require('../../core');
 
-// middleware that is specific to this router
-router.use(function timeLog (req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-})
-
 /**
 @api {get} /api/v1/user/list Request Users information
 @apiName GetListUsers
@@ -21,6 +15,17 @@ router.get('/list', authen.auth, (req, res) => {
   models.user.findAll().then(result => {
     _c.res.send(res, result);
   })
+});
+
+/**
+@api {get} /api/v1/user/show Request User information
+@apiName GetUser
+@apiGroup User
+@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiSampleRequest http://localhost:8000/api/v1/user/show
+*/
+router.get('/show', authen.auth, (req, res) => {
+  _c.res.send(res, req.currentUser);
 });
 
 

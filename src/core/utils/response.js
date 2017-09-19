@@ -15,11 +15,11 @@ module.exports = {
   },
 
   sendFail: function(res, message = "Request is fail", callback = null) {
-    res.json({status: 'fail', message: message})
+    res.json({status: 'failed', message: message})
   },
 
   loginRequire: function(res, message = "User should login", callback = null) {
-    res.json({status: 'fail', message: message})
+    res.json({status: 'failed', message: message})
   },
 
   render: function(res, path, data) {

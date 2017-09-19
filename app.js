@@ -33,7 +33,7 @@ app.use('/api/v1/item-link', itemLinkRou)
 app.use('/api/docs', express.static('docs/apidoc'))
 // Client Route
 app.use('', homeRou)
-app.use('/posts', postRou)
+app.use('/post', postRou)
 
 // Static Route
 app.use(express.static('public'))

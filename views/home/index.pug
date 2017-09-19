@@ -1,5 +1,19 @@
 extends ../shared/templates/template1/index.pug
 
+block nav
+  nav(class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top")
+    div(class="container")
+      a(id="create-post" class="navbar-brand" href="/post/create") + Tạo Bài
+      button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation")
+        span(class="navbar-toggler-icon")
+      div(class="collapse navbar-collapse" id="navbarResponsive")
+        ul(class="navbar-nav ml-auto")
+          li(class="nav-item active")
+            a(class="nav-link" href="#") Home
+              span(class="sr-only") (current)
+          li(class="nav-item")
+            a(class="nav-link" href="#") Logout
+
 block content
   div(class="container")
     span(class="space-10")
@@ -26,4 +40,18 @@ block content
                 h5(class="card-title")
                   h3(class="post-title") Project One
                   p(class="card-text") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!
-    span(class="space-10")       
+    span(class="space-10")
+    
+    
+block append scripts
+  script.
+    $("#create-post").click(function(e) {
+      e.preventDefault();
+      User().verifyLogin(function(event){
+        if (!event.login) {
+          $('#login-modal').modal('show');
+        } else {
+          window.location = e.attr('href');
+        }
+      })
+    })
