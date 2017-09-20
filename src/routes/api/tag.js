@@ -10,7 +10,7 @@ const _c = require('../../core');
 @apiGroup Tag
 @apiParam {String}  itemId=1 Mandatory type.
 @apiParam {String}  name=working Mandatory type.
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/tag/create
 */
 router.post('/create', authen.auth, (req, res) => {

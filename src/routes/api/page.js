@@ -8,7 +8,7 @@ const _c = require('../../core');
 @api {get} /api/v1/page/list Request Page List
 @apiName Page List
 @apiGroup Page
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/page/list
 */
 router.get('/list', authen.auth, (req, res) => {
@@ -23,7 +23,7 @@ router.get('/list', authen.auth, (req, res) => {
 @apiGroup Page
 @apiParam {String}  name="My Note" Mandatory type.
 @apiParam {String}  type=note Mandatory type.
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/page/create
 */
 router.post('/create', authen.auth, (req, res) => {
@@ -39,7 +39,7 @@ router.post('/create', authen.auth, (req, res) => {
 @apiName Delete Page
 @apiGroup Page
 @apiParam {String}  pageId=1 Mandatory type.
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/page/delete
 */
 router.post('/delete', authen.auth, (req, res) => {
@@ -55,7 +55,7 @@ router.post('/delete', authen.auth, (req, res) => {
 @api {get} /api/v1/page/detail/:pageId Request Page Detail
 @apiName Page Detail
 @apiGroup Page
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/page/detail/1
 */
 router.get('/detail/:pageId', authen.auth, (req, res) => {

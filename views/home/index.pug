@@ -3,16 +3,14 @@ extends ../shared/templates/template1/index.pug
 block nav
   nav(class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top")
     div(class="container")
-      a(id="create-post" class="navbar-brand" href="/post/create") + Tạo Bài
-      button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation")
-        span(class="navbar-toggler-icon")
-      div(class="collapse navbar-collapse" id="navbarResponsive")
-        ul(class="navbar-nav ml-auto")
-          li(class="nav-item active")
-            a(class="nav-link" href="#") Home
-              span(class="sr-only") (current)
-          li(class="nav-item")
-            a(class="nav-link" href="#") Logout
+      a(id="create-post" class="navbar-brand" href="javascript:;") + Tạo Bài
+      a(class="navbar-brand mx-auto" href="javascript:;") Pages
+      div(class="" id="navbarResponsive")
+        ul(class="navbar-nav")
+          li(class="nav-item guess hide")
+            a(id="login" class="nav-link" href="javascript:;") Login
+          li(class="nav-item user-login hide")
+            a(id="logout" class="nav-link" href="javascript:;") Logout
 
 block content
   div(class="container")
@@ -20,7 +18,7 @@ block content
     h1(class="post-title") Có thể bạn thích
     div(class="row")
       each val in [1, 2, 3, 4, 5, 6]
-        div(class="col-lg-4 col-md-4 col-sm-4 portfolio-item")
+        div(class="col-4 portfolio-item")
           div(class="card h-100")
             a(class="a-unstyle" href="#")
               img(class="card-img-top" src="http://placehold.it/700x400" alt="")
@@ -32,7 +30,7 @@ block content
     h1(class="post-title") Công Nghệ
     div(class="row")
       each val in [1, 2, 3, 4, 5, 6]
-        div(class="col-lg-4 col-md-4 col-sm-4 portfolio-item")
+        div(class="col-4 portfolio-item")
           div(class="card h-100")
             a(class="a-unstyle" href="#")
               img(class="card-img-top" src="http://placehold.it/700x400" alt="")
@@ -45,13 +43,26 @@ block content
     
 block append scripts
   script.
-    $("#create-post").click(function(e) {
+    $( document ).ready(function() {
+      if (User().isLogin()) {
+        $(".user-login").removeClass("hide");
+        console.log(User().getInfo());
+      } else {
+        $(".guess").removeClass("hide");
+      }
+    });
+    
+    $("#create-post, #login").click(function(e) {
       e.preventDefault();
-      User().verifyLogin(function(event){
-        if (!event.login) {
-          $('#login-modal').modal('show');
-        } else {
-          window.location = e.attr('href');
-        }
-      })
+      if (User().isLogin()) {
+        window.location = "/post/create";
+      } else {
+        $('#login-modal').modal('show');
+      }
+    })
+    
+    $("#logout").click(function(e) {
+      if (User().logout()) {
+        window.location = "/";
+      }
     })

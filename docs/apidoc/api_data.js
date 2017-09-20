@@ -33,7 +33,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/user.js",
+    "filename": "src/routes/api/user.js",
     "groupTitle": "Guest"
   },
   {
@@ -70,7 +70,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/user.js",
+    "filename": "src/routes/api/user.js",
     "groupTitle": "Guest"
   },
   {
@@ -87,7 +87,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -121,7 +121,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/item.js",
+    "filename": "src/routes/api/item.js",
     "groupTitle": "Item"
   },
   {
@@ -168,7 +168,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -180,7 +180,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/item.js",
+    "filename": "src/routes/api/item.js",
     "groupTitle": "Item"
   },
   {
@@ -197,7 +197,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -209,7 +209,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/item.js",
+    "filename": "src/routes/api/item.js",
     "groupTitle": "Item"
   },
   {
@@ -226,7 +226,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -238,7 +238,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/item.js",
+    "filename": "src/routes/api/item.js",
     "groupTitle": "Item"
   },
   {
@@ -255,7 +255,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -267,7 +267,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/item.js",
+    "filename": "src/routes/api/item.js",
     "groupTitle": "Item"
   },
   {
@@ -298,7 +298,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -310,7 +310,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/item.js",
+    "filename": "src/routes/api/item.js",
     "groupTitle": "Item"
   },
   {
@@ -327,7 +327,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -353,7 +353,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/item-link.js",
+    "filename": "src/routes/api/item-link.js",
     "groupTitle": "Item_Link"
   },
   {
@@ -370,7 +370,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -396,7 +396,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/item-link.js",
+    "filename": "src/routes/api/item-link.js",
     "groupTitle": "Item_Link"
   },
   {
@@ -435,7 +435,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -447,7 +447,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/page.js",
+    "filename": "src/routes/api/page.js",
     "groupTitle": "Page"
   },
   {
@@ -478,7 +478,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -490,7 +490,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/page.js",
+    "filename": "src/routes/api/page.js",
     "groupTitle": "Page"
   },
   {
@@ -507,7 +507,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -519,7 +519,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/page.js",
+    "filename": "src/routes/api/page.js",
     "groupTitle": "Page"
   },
   {
@@ -536,7 +536,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -548,7 +548,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/page.js",
+    "filename": "src/routes/api/page.js",
     "groupTitle": "Page"
   },
   {
@@ -587,7 +587,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -599,7 +599,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/tag.js",
+    "filename": "src/routes/api/tag.js",
     "groupTitle": "Tag"
   },
   {
@@ -616,7 +616,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -628,7 +628,36 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/user.js",
+    "filename": "src/routes/api/user.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/user/show",
+    "title": "Request User information",
+    "name": "GetUser",
+    "group": "User",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
+            "description": "<p>Basic Access Authentication token.</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8000/api/v1/user/show"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/routes/api/user.js",
     "groupTitle": "User"
   },
   {
@@ -645,7 +674,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "defaultValue": "Basic dGVzdDoxMjM=",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
             "description": "<p>Basic Access Authentication token.</p>"
           }
         ]
@@ -657,7 +686,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/routes/user.js",
+    "filename": "src/routes/api/user.js",
     "groupTitle": "User"
   }
 ] });

@@ -1,7 +1,6 @@
 <!-- Modal -->
 <div id="login-modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -9,19 +8,21 @@
         <h4 class="modal-title">Login</h4>
       </div>
       <div class="modal-body">
-				<input type="text" name="user" placeholder="Username">
-				<input type="password" name="pass" placeholder="Password">
-				<input id="login-modal-btn" type="submit" name="login" class="login loginmodal-submit" value="Login">
+				<input id="lm-username" type="text" name="user" placeholder="Username" value="test">
+				<input id="lm-password" type="password" name="pass" placeholder="Password" value="123">
+				<input id="lm-btn" type="submit" name="login" class="login loginmodal-submit" value="Login">
       </div>
     </div>
-
   </div>
 </div>
 
 <script>
-  $('#login-modal-btn').click(function(event) {
-    Api().post('/api/v1/user/login', {username: 'test', password: '123'}, function(event) {
-      $.cookie("user", event.data);
+  $('#lm-btn').click(function(event) {
+    Api().post('/api/v1/user/login', {username: $("#lm-username").val(), password: $("#lm-password").val()}, function(event) {
+      if (event.status == "success") {
+        User().saveCookie(event.data);
+        window.location = "/";
+      }
     })
   });
 </script>

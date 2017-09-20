@@ -9,6 +9,7 @@ let pageRou = require('./src/routes/api/page');
 let itemRou = require('./src/routes/api/item');
 let tagRou = require('./src/routes/api/tag');
 let itemLinkRou = require('./src/routes/api/item-link');
+let fileRou = require('./src/routes/api/file');
 // Client Route
 let homeRou = require('./src/routes/client/home');
 let postRou = require('./src/routes/client/post');
@@ -21,15 +22,18 @@ let cors = require('cors');
 let app = express();
 
 app.use(cors())
+app.use(cookieParser())
+app.use('/api/v1/file', fileRou)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser())
+
 // API Route
 app.use('/api/v1/user', userRou)
 app.use('/api/v1/page', pageRou)
 app.use('/api/v1/item', itemRou)
 app.use('/api/v1/tag', tagRou)
 app.use('/api/v1/item-link', itemLinkRou)
+
 app.use('/api/docs', express.static('docs/apidoc'))
 // Client Route
 app.use('', homeRou)

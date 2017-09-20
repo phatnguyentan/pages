@@ -10,7 +10,7 @@ const htmlencode = require('htmlencode');
 @api {get} /api/v1/item/list/:pageId List Item By Page
 @apiName List Item
 @apiGroup Item
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/item/list/1?page=1&per=10
 */
 router.get('/list/:pageId', authen.auth, (req, res, next) => {
@@ -29,7 +29,7 @@ router.get('/list/:pageId', authen.auth, (req, res, next) => {
 @api {get} /api/v1/item/list-home List Item Home Page
 @apiName List Item Home Page
 @apiGroup Item
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/item/list-home
 */
 router.get('/list-home', authen.getUser, (req, res) => {
@@ -51,7 +51,7 @@ router.get('/list-home', authen.getUser, (req, res) => {
 @apiParam {String}  title="test" Mandatory type.
 @apiParam {String}  description="description test" Mandatory type.
 @apiParam {String}  privacy="public" Mandatory type.
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/item/create
 */
 router.post('/create', authen.auth, (req, res) => {
@@ -66,7 +66,7 @@ router.post('/create', authen.auth, (req, res) => {
 @apiName Update Item
 @apiGroup Item
 @apiParam {Json}  values="{name: test}" Mandatory type.
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/item/update/1
 */
 router.post('/update/:itemId', authen.auth, (req, res) => {
@@ -89,7 +89,7 @@ router.post('/update/:itemId', authen.auth, (req, res) => {
 @api {post} /api/v1/item/detail/:itemId Item Detail
 @apiName Item Detail
 @apiGroup Item
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/item/detail/1
 */
 router.post('/detail/:itemId', authen.auth, (req, res) => {
@@ -102,7 +102,7 @@ router.post('/detail/:itemId', authen.auth, (req, res) => {
 @api {post} /api/v1/item/add-page Add to Page
 @apiName Add to Page
 @apiGroup Item
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiParam {String}  pageId=1 Mandatory type.
 @apiParam {String}  itemId=1 Mandatory type.
 @apiSampleRequest http://localhost:8000/api/v1/item/add-page

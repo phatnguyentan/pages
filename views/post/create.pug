@@ -6,7 +6,17 @@ block append scripts
   script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.6/js/froala_editor.pkgd.min.js')
   script.
-    $('textarea').froalaEditor();
+    $('#froala').froalaEditor(
+      {imageUploadURL: '/api/v1/file/upload'}
+    );
+    //- $('#froala').on('froalaEditor.save.after', function (e, editor, data) {
+    //-   // Do something here.
+    //-   console.log(data);
+    //- });
+    $('#froala').on('froalaEditor.keypress', function (e, editor, keypressEvent) {
+      // Do something here.
+      console.log($('#froala').froalaEditor('html.get', true));
+    });
   
 block append style
   link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet")
@@ -17,6 +27,8 @@ block append style
 
 block content
   div(class="container")
-    span(class="space-10")
-    textarea()
+    div(class="space-10")
+    input(class="textInput col-12" placeholder="Tiêu Đề")
+    div(class="space-10")
+    textarea(id="froala")
     

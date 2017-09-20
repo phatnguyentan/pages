@@ -10,7 +10,7 @@ const htmlencode = require('htmlencode');
 @api {post} /api/v1/item-link/create/:itemId Create Item Link
 @apiName Create Item Link
 @apiGroup Item Link
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiParam {String}  link="https://nodejs.org/api/documentation.html" Mandatory type.
 @apiSampleRequest http://localhost:8000/api/v1/item-link/create/1
 */
@@ -30,7 +30,7 @@ router.post('/create/:itemId', authen.auth, (req, res) => {
 @api {post} /api/v1/item-link/delete Delete Item Link
 @apiName Delete Item Link
 @apiGroup Item Link
-@apiHeader {String} Authorization ="Basic dGVzdDoxMjM=" Basic Access Authentication token.
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiParam {String}  linkId=1 Mandatory type.
 @apiSampleRequest http://localhost:8000/api/v1/item-link/delete
 */

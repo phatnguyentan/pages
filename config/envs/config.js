@@ -13,4 +13,5 @@ switch(process.env.NODE_ENV){
     };
 }
 config.url = `${config.protocol}://${config.host}:${config.port}`
+config.basedir = `${__dirname}/../../`
 module.exports = config

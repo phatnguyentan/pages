@@ -16,7 +16,12 @@ module.exports = {
         engine: 'MYISAM',                     // default: 'InnoDB'
         charset: 'utf-8'                    // default: null, latin1
       }
-    )
+    ).then(function() {
+      return queryInterface.addConstraint('pages', ['name'], {
+        type: 'unique',
+        name: 'unique_constraint_name'
+      });
+    });
   },
 
   down: function (queryInterface, Sequelize) {

@@ -1,17 +1,23 @@
 function User() {
 
-  this.verifyLogin = function(callback) {
-    if (!$.cookie("user")) {
-      callback({login: false})
-      return;
+  this.isLogin = function() {
+    if (!$.cookie("session")) {
+      return false;
     }
-    Api().get('/api/v1/user/show', {}, function(event) {
-      if (event.status == "success") {
-        callback({login: true});
-      } else {
-        callback({login: false});
-      }
-    })
+    return true;
+  };
+
+  this.getInfo = function() {
+    return JSON.parse($.cookie("session"));
+  };
+
+  this.logout = function(callback) {
+    $.removeCookie("session");
+    return true;
+  };
+
+  this.saveCookie = function(data) {
+    $.cookie("session", JSON.stringify(data));
   };
 
   return this;
