@@ -5,7 +5,11 @@ const models = require('../../models');
 const _c = require('../../core');
 
 router.get('/create', (req, res) => {
-  res.render('post/create', { title: 'Home', message: 'Hello there!' })
+  res.render('post/create', { title: 'Post Create'})
+});
+
+router.get('/update/:itemId', (req, res) => {
+  res.render('post/update', { title: 'Post Update'})
 });
 
 module.exports = router;

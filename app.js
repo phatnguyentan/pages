@@ -10,13 +10,13 @@ let itemRou = require('./src/routes/api/item');
 let tagRou = require('./src/routes/api/tag');
 let itemLinkRou = require('./src/routes/api/item-link');
 let fileRou = require('./src/routes/api/file');
+let entryRou = require('./src/routes/api/entry');
 // Client Route
 let homeRou = require('./src/routes/client/home');
 let postRou = require('./src/routes/client/post');
 
 let error = require('./src/services/error');
 const _c = require('./src/core');
-let debug = require('debug')('all:server');
 let cors = require('cors');
 
 let app = express();
@@ -24,8 +24,9 @@ let app = express();
 app.use(cors())
 app.use(cookieParser())
 app.use('/api/v1/file', fileRou)
-app.use(bodyParser.json())
+// app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(entryRou.start)
 
 // API Route
 app.use('/api/v1/user', userRou)

@@ -1,6 +1,6 @@
 
 let app = require('../app');
-let debug = require('debug')('api_pages:server');
+let debug = require('debug')('pages:debug');
 let http = require('http');
 
 let port = normalizePort(process.env.PORT || '8000');
@@ -24,6 +24,7 @@ function normalizePort(val) {
 }
 
 function onError(error) {
+  debug(error);
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -35,11 +36,11 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+      debug(bind + ' requires elevated privileges');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+      debug(bind + ' is already in use');
       process.exit(1);
       break;
     default:

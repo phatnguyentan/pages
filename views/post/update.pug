@@ -1,17 +1,5 @@
 extends ../shared/templates/template1/index.pug
 
-block nav
-  nav(class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top")
-    div(class="container")
-      a(id="create-post" class="navbar-brand" href="javascript:;") + Tạo Bài
-      a(class="navbar-brand mx-auto" href="javascript:;") Pages
-      div(class="" id="navbarResponsive")
-        ul(class="navbar-nav")
-          li(class="nav-item guess hide")
-            a(id="login" class="nav-link" href="javascript:;") Login
-          li(class="nav-item user-login hide")
-            a(id="logout" class="nav-link" href="javascript:;") Logout
-
 block append scripts
   script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js')
@@ -21,26 +9,21 @@ block append scripts
       {imageUploadURL: '/api/v1/file/upload'}
     );
     var saveFunc = $.debounce(1000, function (e, editor, keypressEvent) {
-      var id = $('#post').val();
-      if (id) {
-        Api().post(`/api/v1/item/update/${id}`, {
-            description: $('#froala').froalaEditor('html.get', true),
-            title: $('#title').val()
-          }, function(event) {
-            console.log(event);
-        });
-      } else {
-        Api().post('/api/v1/item/create', {
+      Api().post(`/api/v1/item/update/${Common().getUrlId()}`, {
           description: $('#froala').froalaEditor('html.get', true),
           title: $('#title').val()
-        }, function(res) {
-          $('#post').val(res.data.id);
-        });
-      }
-      
+        }, function(event) {
+          console.log(event);
+      }); 
     });
     $('#froala').on('froalaEditor.keypress', saveFunc);
+    $('#froala').on('froalaEditor.image.uploaded', saveFunc);
     $('#title').keypress(saveFunc);
+    Api().get(`/api/v1/item/detail/${Common().getUrlId()}`, {}, function(res) {
+      console.log(res);
+      $("#title").val(res.data.title);
+      $('#froala').froalaEditor('html.insert', Common().htmlDecode(res.data.description), true);
+    })
   
 block append style
   link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet")
@@ -55,5 +38,4 @@ block content
     input(id="title" class="textInput col-12" placeholder="Tiêu Đề")
     div(class="space-10")
     textarea(id="froala")
-    input(id="post" class="hide" value="")
     

@@ -1,10 +1,11 @@
 function Api() {
   this.post = function(url, data, callback) {
+
     $.ajax({
       type: "POST",
       url: url,
       headers: {
-        "Authorization": `Basic ${$.cookie("token")}`
+        "Authorization": `Basic ${User().getToken()}`
       },
       data: data,
       success: callback,
@@ -17,7 +18,7 @@ function Api() {
       type: "GET",
       url: url,
       headers: {
-        "Authorization": `Basic ${$.cookie("token")}`
+        "Authorization": `Basic ${User().getToken()}`
       },
       success: callback,
       dataType: 'json'
