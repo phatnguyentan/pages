@@ -5,7 +5,7 @@ module.exports = {
   send: function(res, data) {
     let body = {status: 'success', data: data}
     if (res.req.pagination) {
-      body.pageMetadata = buildPageMetadata(res.req, data)
+      body.pagination = buildPagination(res.req, data)
     }
     res.json(body)
   },
@@ -27,32 +27,32 @@ module.exports = {
   }
 }
 
-function buildPageMetadata(req, data) {
+function buildPagination(req, data) {
   // console.log(querystring, req.query);
-  let pageMetadata = {}
-  pageMetadata.page = req.pagination.page
-  pageMetadata.per = req.pagination.per
-  pageMetadata.links = {}
-  pageMetadata.links.self = config.url + req.baseUrl + req.path + `?${querystring.stringify(req.query)}`
+  let pagination = {}
+  pagination.page = req.pagination.page
+  pagination.per = req.pagination.per
+  pagination.links = {}
+  pagination.links.self = config.url + req.baseUrl + req.path + `?${querystring.stringify(req.query)}`
 
   req.query.page = 1;
-  pageMetadata.links.first = config.url + req.baseUrl + req.path + `?${querystring.stringify(req.query)}`
-  req.query.page = pageMetadata.page;
+  pagination.links.first = config.url + req.baseUrl + req.path + `?${querystring.stringify(req.query)}`
+  req.query.page = pagination.page;
   // prev link
-  if (pageMetadata.page > 1) {
+  if (pagination.page > 1) {
     req.query.page = parseInt(req.query.page) - 1;
-    pageMetadata.links.prev = config.url + req.baseUrl + req.path + `?${querystring.stringify(req.query)}`
+    pagination.links.prev = config.url + req.baseUrl + req.path + `?${querystring.stringify(req.query)}`
     req.query.page = parseInt(req.query.page) + 1;
   } else {
-    pageMetadata.links.prev = null
+    pagination.links.prev = null
   }
   // next link
-  if (pageMetadata.per == data.length) {
+  if (pagination.per == data.length) {
     req.query.page = parseInt(req.query.page) + 1;
-    pageMetadata.links.next = config.url + req.baseUrl + req.path + `?${querystring.stringify(req.query)}`
+    pagination.links.next = config.url + req.baseUrl + req.path + `?${querystring.stringify(req.query)}`
     req.query.page = parseInt(req.query.page) - 1;
   } else {
-    pageMetadata.links.next = null
+    pagination.links.next = null
   }
-  return pageMetadata
+  return pagination
 }

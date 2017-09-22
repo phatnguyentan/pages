@@ -12,21 +12,15 @@ const formidable = require('formidable');
 */
 router.post('/upload', (req, res) => {
   let form = new formidable.IncomingForm();
-  // form.uploadDir = "/public/images";
-  form.parse(req, function(err, fields, files) {
-    console.log(fields, files);
-  });
-  form.on('error', function(err) {
+  form.parse(req, (err, fields, files) => {
     _c.debug(err);
   });
-  form.on('fileBegin', function (name, file){
-    _c.debug(file)
-    file.path = _c.config.basedir + '/public/images/' + file.name;
+  form.on('fileBegin', (name, file) => {
+    file.path = _c.config.basedir + 'public/images/' + file.name;
   });
-  form.on('file', function (name, file){
+  form.on('file', (name, file) => {
     res.json({link: '/images/' + file.name});
   });
-
 });
 
 // router.post('/upload', authen.auth, (req, res) => {

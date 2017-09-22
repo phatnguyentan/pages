@@ -9,9 +9,15 @@ switch(process.env.NODE_ENV){
     config = {
       protocol: "http",
       host: "localhost",
-      port: 8000
+      port: 8000,
+      api: {
+        protocol: "http",
+        host: "localhost",
+        port: 8000
+      }
     };
 }
 config.url = `${config.protocol}://${config.host}:${config.port}`
+config.apiUrl = `${config.api.protocol}://${config.api.host}:${config.api.port}`
 config.basedir = `${__dirname}/../../`
 module.exports = config

@@ -1,0 +1,37 @@
+div(class="" id="navbarResponsive")
+  ul(class="navbar-nav")
+    li(class="nav-item guess hide user-login")
+      a(id="user" class="nav-link" href="javascript:;") 
+    li(class="nav-item guess hide")
+      a(id="login" class="nav-link" href="javascript:;") Login
+    li(class="nav-item user-login hide")
+      a(id="logout" class="nav-link" href="javascript:;") Logout
+      
+      
+block append scripts
+  script.
+    $(document).ready(function() {
+      if (User().isLogin()) {
+        //- console.log(User().getInfo().user.username);
+        $("#user").text(User().getInfo().user.username);
+        $("#user").attr("href", "/user/" + User().getInfo().user.username);
+        $(".user-login").removeClass("hide");
+      } else {
+        $(".guess").removeClass("hide");
+      }
+      
+      $("#create-post, #login").click(function(e) {
+        e.preventDefault();
+        if (User().isLogin()) {
+          window.location = "/post/create";
+        } else {
+          $('#login-modal').modal('show');
+        }
+      });
+      
+      $("#logout").click(function(e) {
+        if (User().logout()) {
+          window.location = "/";
+        }
+      });
+    });

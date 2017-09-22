@@ -1,29 +1,37 @@
 extends ../shared/templates/template1/index.pug
 
+block nav
+  nav(class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top")
+    div(class="container")
+      a(id="create-post" class="navbar-brand" href="javascript:;") + Tạo Bài
+      a(class="navbar-brand mx-auto" href="javascript:;") Pages
+      include ../shared/partials/header/user.pug
+
 block append scripts
   script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.6/js/froala_editor.pkgd.min.js')
   script.
-    $('#froala').froalaEditor(
-      {imageUploadURL: '/api/v1/file/upload'}
-    );
-    var saveFunc = $.debounce(1000, function (e, editor, keypressEvent) {
-      Api().post(`/api/v1/item/update/${Common().getUrlId()}`, {
-          description: $('#froala').froalaEditor('html.get', true),
-          title: $('#title').val()
-        }, function(event) {
-          console.log(event);
-      }); 
+    $( document ).ready(function() {
+      $('#froala').froalaEditor(
+        {imageUploadURL: '/api/v1/file/upload'}
+      );
+      var saveFunc = $.debounce(1000, function (e, editor, keypressEvent) {
+        Api().post(`/api/v1/item/update/${Common().getUrlId()}`, {
+            description: $('#froala').froalaEditor('html.get', true),
+            title: $('#title').val()
+          }, function(event) {
+            console.log(event);
+        }); 
+      });
+      $('#froala').on('froalaEditor.keypress', saveFunc);
+      $('#froala').on('froalaEditor.image.uploaded', saveFunc);
+      $('#title').keypress(saveFunc);
+      Api().get(`/api/v1/item/detail/${Common().getUrlId()}`, {}, function(res) {
+        $("#title").val(res.data.title);
+        $('#froala').froalaEditor('html.insert', Common().htmlDecode(res.data.description), true);
+      })
     });
-    $('#froala').on('froalaEditor.keypress', saveFunc);
-    $('#froala').on('froalaEditor.image.uploaded', saveFunc);
-    $('#title').keypress(saveFunc);
-    Api().get(`/api/v1/item/detail/${Common().getUrlId()}`, {}, function(res) {
-      console.log(res);
-      $("#title").val(res.data.title);
-      $('#froala').froalaEditor('html.insert', Common().htmlDecode(res.data.description), true);
-    })
   
 block append style
   link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet")

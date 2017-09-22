@@ -1,3 +1,4 @@
-DEBUG=pages:debug forever -w bin/www.js
+DEBUG=pages:debug node bin/www.js
+pm2 start bin/www.js && pm2 logs www
 pm2 start bin/www.js --watch && pm2 logs www
 pm2 stop all

@@ -26,6 +26,19 @@ router.get('/list/:pageId', authen.auth, (req, res, next) => {
 });
 
 /**
+@api {get} /api/v1/item/user-list/:userId List Item By User
+@apiName List Item
+@apiGroup Item
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
+@apiSampleRequest http://localhost:8000/api/v1/item/user-list/1?page=1&per=10
+*/
+router.get('/user-list/:userId', authen.auth, (req, res, next) => {
+  req.currentUser.getItems(_c.req.paginate(req)).then(items => {
+    _c.res.send(res, items);
+  })
+});
+
+/**
 @api {get} /api/v1/item/list-home List Item Home Page
 @apiName List Item Home Page
 @apiGroup Item

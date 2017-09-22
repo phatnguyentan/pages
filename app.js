@@ -14,6 +14,7 @@ let entryRou = require('./src/routes/api/entry');
 // Client Route
 let homeRou = require('./src/routes/client/home');
 let postRou = require('./src/routes/client/post');
+let userClientRou = require('./src/routes/client/user');
 
 let error = require('./src/services/error');
 const _c = require('./src/core');
@@ -39,6 +40,7 @@ app.use('/api/docs', express.static('docs/apidoc'))
 // Client Route
 app.use('', homeRou)
 app.use('/post', postRou)
+app.use('/user', userClientRou)
 
 // Static Route
 app.use(express.static('public'))

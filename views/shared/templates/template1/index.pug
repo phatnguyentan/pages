@@ -6,6 +6,16 @@ html(lang='en')
       link(href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet")
     style
       include ../../../../public/css/style.css
+    block scripts
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js', crossorigin="anonymous")
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', crossorigin="anonymous")
+      script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', crossorigin="anonymous")
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js', crossorigin="anonymous")
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js', crossorigin="anonymous")
+      script
+        include ../../../../public/js/common.js
+        include ../../../../public/js/ajax/api.js
+        include ../../../../public/js/user/user.js
   //- Body
   body
     block nav
@@ -19,20 +29,7 @@ html(lang='en')
   //-   ul
   //-     li About
 
-  block footer  
-    block scripts
-      script.
-        //- var data = !{JSON.stringify(data)};
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js', crossorigin="anonymous")
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', crossorigin="anonymous")
-      script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', crossorigin="anonymous")
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js', crossorigin="anonymous")
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js', crossorigin="anonymous")
-      script
-        include ../../../../public/js/common.js
-        include ../../../../public/js/ajax/api.js
-        include ../../../../public/js/user/user.js
-        
+  block footer
     block modal
       include ../../modals/user/login.html
 
