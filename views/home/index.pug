@@ -1,11 +1,7 @@
 extends ../shared/templates/template1/index.pug
 
 block nav
-  nav(class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top")
-    div(class="container")
-      a(id="create-post" class="navbar-brand" href="javascript:;") + Tạo Bài
-      a(class="navbar-brand mx-auto" href="javascript:;") Pages
-      include ../shared/partials/header/user.pug
+  include ../shared/partials/header/nav.pug
 
 block content
   div(class="container")
@@ -15,7 +11,7 @@ block content
       each val in [1, 2, 3, 4, 5, 6]
         div(class="col-4 portfolio-item")
           div(class="card h-100")
-            a(class="a-unstyle" href="#")
+            a(class="a-unstyle" href="/post/detail/1")
               img(class="card-img-top" src="http://placehold.it/700x400" alt="")
               div(class="card-body")
                 h5(class="card-title")

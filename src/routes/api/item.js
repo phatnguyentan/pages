@@ -4,7 +4,8 @@ let authen = require('../../services/authenticate');
 const models = require('../../models');
 const _c = require('../../core');
 const htmlencode = require('htmlencode');
-
+const striptags = require('striptags');
+const utf8 = require('utf8');
 
 /**
 @api {get} /api/v1/item/list/:pageId List Item By Page
@@ -68,8 +69,13 @@ router.get('/list-home', authen.getUser, (req, res) => {
 @apiSampleRequest http://localhost:8000/api/v1/item/create
 */
 router.post('/create', authen.auth, (req, res) => {
-  let text = htmlencode.htmlEncode(req.body.description)
-  models.item.create({title: req.body.title, description: text, userId: req.currentUser.id, privacy: req.body.privacy}).then(item => {
+  let content = htmlencode.htmlEncode(req.body.content)
+  let des = req.body.content.substring(0, 50);
+  models.item.create({title: req.body.title,
+    description: des,
+    userId: req.currentUser.id,
+    privacy: req.body.privacy,
+    content: content}).then(item => {
     _c.res.send(res, item);
   });
 });
@@ -84,11 +90,13 @@ router.post('/create', authen.auth, (req, res) => {
 */
 router.post('/update/:itemId', authen.auth, (req, res) => {
   models.item.findOne({ where: { id: req.params.itemId }}).then(item => {
-    let text = htmlencode.htmlEncode(req.body.description)
+    let content = htmlencode.htmlEncode(req.body.content);
+    let des = htmlencode.htmlEncode(striptags(req.body.content.substring(0, 100)));
     if (item) {
       item.updateAttributes({
         title: req.body.title,
-        description: text
+        content: content,
+        description: des
       }).then(data => {
         _c.res.send(res, item);
       })

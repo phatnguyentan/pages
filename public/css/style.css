@@ -50,6 +50,10 @@ p {
     font-style: normal;
 }
 
+.portfolio-item {
+  padding: 15px;
+}
+
 @media (min-width: 992px) {
     body {
         padding-top: 56px;

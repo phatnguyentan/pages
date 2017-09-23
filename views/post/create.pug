@@ -1,12 +1,8 @@
 extends ../shared/templates/template1/index.pug
 
 block nav
-  nav(class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top")
-    div(class="container")
-      a(id="create-post" class="navbar-brand" href="javascript:;") + Tạo Bài
-      a(class="navbar-brand mx-auto" href="javascript:;") Pages
-      include ../shared/partials/header/user.pug
-
+  include ../shared/partials/header/nav.pug
+  
 block append scripts
   script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js')
@@ -18,24 +14,27 @@ block append scripts
       );
       var saveFunc = $.debounce(1000, function (e, editor, keypressEvent) {
         var id = $('#post').val();
+        $("#save").text("Saving");
         if (id) {
           Api().post(`/api/v1/item/update/${id}`, {
-              description: $('#froala').froalaEditor('html.get', true),
+              content: $('#froala').froalaEditor('html.get', true),
               title: $('#title').val()
             }, function(event) {
-              console.log(event);
+              $("#save").text("Save");
           });
         } else {
           Api().post('/api/v1/item/create', {
-            description: $('#froala').froalaEditor('html.get', true),
+            content: $('#froala').froalaEditor('html.get', true),
             title: $('#title').val()
           }, function(res) {
+            $("#save").text("Save");
             $('#post').val(res.data.id);
           });
         }
       });
       $('#froala').on('froalaEditor.keypress', saveFunc);
       $('#title').keypress(saveFunc);
+      $('#save').click(saveFunc);
     });
   
 block append style
@@ -51,5 +50,8 @@ block content
     input(id="title" class="textInput col-12" placeholder="Tiêu Đề")
     div(class="space-10")
     textarea(id="froala")
+    button(id="save") Save
+    //- Difference bettween create and update
     input(id="post" class="hide" value="")
+    
     

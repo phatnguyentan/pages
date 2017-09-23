@@ -1,11 +1,7 @@
 extends ../shared/templates/template1/index.pug
 
 block nav
-  nav(class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top")
-    div(class="container")
-      a(id="create-post" class="navbar-brand" href="javascript:;") + Tạo Bài
-      a(class="navbar-brand mx-auto" href="javascript:;") Pages
-      include ../shared/partials/header/user.pug
+  include ../shared/partials/header/nav.pug
 
 block append scripts
   script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js')
@@ -17,19 +13,21 @@ block append scripts
         {imageUploadURL: '/api/v1/file/upload'}
       );
       var saveFunc = $.debounce(1000, function (e, editor, keypressEvent) {
+        $("#save").text("Saving");
         Api().post(`/api/v1/item/update/${Common().getUrlId()}`, {
-            description: $('#froala').froalaEditor('html.get', true),
+            content: $('#froala').froalaEditor('html.get', true),
             title: $('#title').val()
           }, function(event) {
-            console.log(event);
+            $("#save").text("Save");
         }); 
       });
       $('#froala').on('froalaEditor.keypress', saveFunc);
       $('#froala').on('froalaEditor.image.uploaded', saveFunc);
       $('#title').keypress(saveFunc);
+      $('#save').click(saveFunc);
       Api().get(`/api/v1/item/detail/${Common().getUrlId()}`, {}, function(res) {
         $("#title").val(res.data.title);
-        $('#froala').froalaEditor('html.insert', Common().htmlDecode(res.data.description), true);
+        $('#froala').froalaEditor('html.insert', Common().htmlDecode(res.data.content), true);
       })
     });
   
@@ -46,4 +44,6 @@ block content
     input(id="title" class="textInput col-12" placeholder="Tiêu Đề")
     div(class="space-10")
     textarea(id="froala")
+    div(class="space-10")
+    button(id="save") Save
     

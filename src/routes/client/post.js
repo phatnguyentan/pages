@@ -12,4 +12,8 @@ router.get('/update/:itemId', (req, res) => {
   res.render('post/update', { title: 'Post Update'})
 });
 
+router.get('/detail/:itemId', (req, res) => {
+  res.render('post/detail', { title: 'Post Detail'})
+});
+
 module.exports = router;

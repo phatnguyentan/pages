@@ -11,6 +11,7 @@ module.exports = {
         privacy: Sequelize.STRING,
         type: Sequelize.STRING,
         description: Sequelize.TEXT,
+        content: Sequelize.TEXT,
         createdAt: { allowNull: false, type: Sequelize.DATE },
         updatedAt: { allowNull: false, type: Sequelize.DATE }
       },
