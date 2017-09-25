@@ -69,7 +69,8 @@ router.get('/list-home', authen.getUser, (req, res) => {
 @apiSampleRequest http://localhost:8000/api/v1/item/create
 */
 router.post('/create', authen.auth, (req, res) => {
-  let content = htmlencode.htmlEncode(req.body.content)
+  // let content = htmlencode.htmlEncode(req.body.content)
+  let content = req.body.content
   let des = req.body.content.substring(0, 50);
   models.item.create({title: req.body.title,
     description: des,
@@ -90,8 +91,9 @@ router.post('/create', authen.auth, (req, res) => {
 */
 router.post('/update/:itemId', authen.auth, (req, res) => {
   models.item.findOne({ where: { id: req.params.itemId }}).then(item => {
-    let content = htmlencode.htmlEncode(req.body.content);
-    let des = htmlencode.htmlEncode(striptags(req.body.content.substring(0, 100)));
+    // let content = htmlencode.htmlEncode(req.body.content);
+    let content = req.body.content;
+    let des = htmlencode.htmlEncode(striptags(req.body.content).substring(0, 100));
     if (item) {
       item.updateAttributes({
         title: req.body.title,

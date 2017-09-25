@@ -20,7 +20,7 @@ function User() {
   };
 
   this.logout = function(callback) {
-    $.removeCookie("session");
+    $.removeCookie("session", { path: '/' });
     return true;
   };
 

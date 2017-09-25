@@ -1,6 +1,6 @@
 let express = require('express');
 let router = express.Router();
-let cAuthen = require('../../services/c-authenticate');
+const cAuthen = require('../../services/c-authenticate');
 const models = require('../../models');
 const _c = require('../../core');
 const htmlencode = require('htmlencode');
