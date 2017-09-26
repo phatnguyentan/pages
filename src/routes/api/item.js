@@ -115,10 +115,13 @@ router.post('/update/:itemId', authen.auth, (req, res) => {
 @apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
 @apiSampleRequest http://localhost:8000/api/v1/item/detail/1
 */
-router.get('/detail/:itemId', authen.auth, (req, res) => {
-  req.currentUser.getItems({ where: { id: req.params.itemId }, include: [{model: models.tag}, {model: models.item_link, as: "itemLinks"}]}).then(item => {
-    _c.res.send(res, item[0]);
-  });
+router.get('/detail/:itemId', (req, res) => {
+  // req.currentUser.getItems({ where: { id: req.params.itemId }, include: [{model: models.tag}, {model: models.item_link, as: "itemLinks"}]}).then(item => {
+  //   _c.res.send(res, item[0]);
+  // });
+  models.item.findOne({ where: { id: req.params.itemId }, include: [{model: models.tag}, {model: models.user}]}).then(item => {
+    _c.res.send(res, item);
+  })
 });
 
 /**

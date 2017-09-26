@@ -6,12 +6,10 @@ nav(class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top")
     
 script.
   $(document).ready(function() {
-    $("#create-post, #login").click(function(e) {
+    $("#create-post").click(function(e) {
       e.preventDefault();
-      if (User().isLogin()) {
+      User().requireLogin(function() {
         window.location = "/post/create";
-      } else {
-        $('#login-modal').modal('show');
-      }
+      });
     });
   });

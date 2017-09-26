@@ -6,6 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     title: DataTypes.STRING,
     privacy: DataTypes.STRING,
     description: DataTypes.TEXT,
+    thumbnail: DataTypes.TEXT,
     content: DataTypes.TEXT,
     userId: DataTypes.INTEGER
   }, {

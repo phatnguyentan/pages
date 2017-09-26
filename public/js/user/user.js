@@ -8,7 +8,11 @@ function User() {
   };
 
   this.getInfo = function() {
-    return JSON.parse($.cookie("session"));
+    var session = $.cookie("session");
+    if(session) {
+      return JSON.parse($.cookie("session"));
+    }
+    return {};
   };
 
   this.getToken = function() {
@@ -25,7 +29,14 @@ function User() {
   };
 
   this.saveCookie = function(data) {
-    $.cookie("session", JSON.stringify(data));
+    $.cookie("session", JSON.stringify(data), { path: '/' });
+  };
+
+  this.requireLogin = function(callback) {
+    if(this.isLogin()) {
+      callback();
+    }
+    $('#login-modal').modal('show');
   };
 
   return this;

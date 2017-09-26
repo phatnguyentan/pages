@@ -8,9 +8,12 @@ module.exports = {
       host: config.api.host,
       path: url,
       port: config.api.port,
-      auth: `${data.user.username}:${data.user.password}`,
       data: data
     };
+
+    if(data.user) {
+      options.auth = `${data.user.username}:${data.user.password}`
+    }
 
     let req = http.get(options, function(res) {
       let decoder = new StringDecoder('utf8');

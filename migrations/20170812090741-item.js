@@ -9,6 +9,7 @@ module.exports = {
         userId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
         title: Sequelize.STRING,
         privacy: Sequelize.STRING,
+        thumbnail: Sequelize.STRING,
         type: Sequelize.STRING,
         description: Sequelize.TEXT,
         content: Sequelize.TEXT,

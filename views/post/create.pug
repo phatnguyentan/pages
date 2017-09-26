@@ -2,56 +2,19 @@ extends ../shared/templates/template1/index.pug
 
 block nav
   include ../shared/partials/header/nav.pug
-  
-block append scripts
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.6/js/froala_editor.pkgd.min.js')
-  script.
-    $( document ).ready(function() {
-      $('#froala').froalaEditor(
-        {imageUploadURL: '/api/v1/file/upload'}
-      );
-      var saveFunc = $.debounce(1000, function (e, editor, keypressEvent) {
-        var id = $('#post').val();
-        $("#save").text("Saving");
-        if (id) {
-          Api().post(`/api/v1/item/update/${id}`, {
-              content: $('#froala').froalaEditor('html.get', true),
-              title: $('#title').val()
-            }, function(event) {
-              $("#save").text("Save");
-          });
-        } else {
-          Api().post('/api/v1/item/create', {
-            content: $('#froala').froalaEditor('html.get', true),
-            title: $('#title').val()
-          }, function(res) {
-            $("#save").text("Save");
-            $('#post').val(res.data.id);
-          });
-        }
-      });
-      $('#froala').on('froalaEditor.keypress', saveFunc);
-      $('#title').keypress(saveFunc);
-      $('#save').click(saveFunc);
-    });
-  
+
 block append style
   link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet")
   link(href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css" rel="stylesheet")
   link(href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.6/css/froala_editor.pkgd.min.css" rel="stylesheet")
   link(href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.6/css/froala_style.min.css" rel="stylesheet")
-  
 
+block append scripts
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.6/js/froala_editor.pkgd.min.js')
+  
 block content
-  div(class="container")
-    div(class="space-10")
-    input(id="title" class="textInput col-12" placeholder="Tiêu Đề")
-    div(class="space-10")
-    textarea(id="froala")
-    button(id="save") Save
-    //- Difference bettween create and update
-    input(id="post" class="hide" value="")
+  include shared/post-create-update.pug
     
     

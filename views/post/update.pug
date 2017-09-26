@@ -2,48 +2,18 @@ extends ../shared/templates/template1/index.pug
 
 block nav
   include ../shared/partials/header/nav.pug
-
-block append scripts
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.6/js/froala_editor.pkgd.min.js')
-  script.
-    $( document ).ready(function() {
-      $('#froala').froalaEditor(
-        {imageUploadURL: '/api/v1/file/upload'}
-      );
-      var saveFunc = $.debounce(1000, function (e, editor, keypressEvent) {
-        $("#save").text("Saving");
-        Api().post(`/api/v1/item/update/${Common().getUrlId()}`, {
-            content: $('#froala').froalaEditor('html.get', true),
-            title: $('#title').val()
-          }, function(event) {
-            $("#save").text("Save");
-        }); 
-      });
-      $('#froala').on('froalaEditor.keypress', saveFunc);
-      $('#froala').on('froalaEditor.image.uploaded', saveFunc);
-      $('#title').keypress(saveFunc);
-      $('#save').click(saveFunc);
-      Api().get(`/api/v1/item/detail/${Common().getUrlId()}`, {}, function(res) {
-        $("#title").val(res.data.title);
-        $('#froala').froalaEditor('html.insert', Common().htmlDecode(res.data.content), true);
-      })
-    });
   
 block append style
   link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet")
   link(href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css" rel="stylesheet")
   link(href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.6/css/froala_editor.pkgd.min.css" rel="stylesheet")
   link(href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.6/css/froala_style.min.css" rel="stylesheet")
-  
 
+block append scripts
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.6/js/froala_editor.pkgd.min.js')
+  
 block content
-  div(class="container")
-    div(class="space-10")
-    input(id="title" class="textInput col-12" placeholder="Tiêu Đề")
-    div(class="space-10")
-    textarea(id="froala")
-    div(class="space-10")
-    button(id="save") Save
+  include shared/post-create-update.pug
     

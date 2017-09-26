@@ -1,0 +1,69 @@
+div(class="container")
+  div(class="space-10")
+  input(id="title" class="textInput col-12" placeholder="Tiêu Đề")
+  div(class="space-10")
+  textarea(id="editor")
+  div(class="space-10")
+  button(id="save") Save
+  //- Difference bettween create and update
+  input(id="post" class="hide" value="")
+  
+
+script.
+  var token = "#{token}";
+  $( document ).ready(function() {
+    $('#editor').froalaEditor(
+      {
+        imageUploadURL: '/api/v1/file/upload',
+        videoUploadURL: '',
+        requestHeaders: {
+          Authorization: "Basic " + token
+        }
+      },
+    );
+    //- Update page only
+    if (Common().getUrlId() !== "create") {
+      Api().get(`/api/v1/item/detail/${Common().getUrlId()}`, {}, function(event) {
+        $("#title").val(event.data.title);
+        $('#editor').froalaEditor('html.insert', event.data.content, true);
+        $('#post').val(event.data.id);
+      })
+    }
+    
+    var update = function(id, callback) {
+      Api().post(`/api/v1/item/update/${id}`, {
+          content: $('#editor').froalaEditor('html.get', true),
+          title: $('#title').val()
+        }, function(event) {
+          callback(event);
+      });
+    }
+    
+    var create = function(data, callback) {
+      Api().post('/api/v1/item/create', data, function(event) {
+        callback(event);
+      });
+    }
+    
+    var saveFunc = function (e, editor, keypressEvent) {
+      var id = $('#post').val();
+      $("#save").text("Saving");
+      if (id) {
+        update(id, function(event) {
+          $("#save").text("Save")
+        })
+      } else {
+        create({
+          content: $('#editor').froalaEditor('html.get', true),
+          title: $('#title').val()
+        }, function(event) {
+          $("#save").text("Save");
+          $('#post').val(event.data.id);
+        });
+      }
+    };
+    var saveFuncDebounce = $.debounce(1000, saveFunc);
+    $('#editor').on('froalaEditor.keypress', saveFuncDebounce);
+    $('#title').keypress(saveFuncDebounce);
+    $('#save').click(saveFunc);
+  });

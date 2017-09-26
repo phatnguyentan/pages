@@ -8,7 +8,6 @@ block append scripts
     var content = "#{data.content}";
   script.
     $(document).ready(function() {
-      //- Common().htmlDecode(
       $("#post-content").html(Common().htmlDecode(content));
     });
 
@@ -22,8 +21,6 @@ block content
           i(class="fa fa-pencil float-right") 
         hr
         p() Posted on January 1, 2017 at 12:00 PM
-        hr
-        img(class="img-fluid rounded" src="http://placehold.it/900x300" alt="")
         hr
         div(id="post-content")
         hr
