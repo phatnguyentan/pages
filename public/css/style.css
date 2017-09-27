@@ -54,6 +54,13 @@ p {
   padding: 15px;
 }
 
+.thumnail-container {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0px;
+  height: 200px;
+}
+
 @media (min-width: 992px) {
     body {
         padding-top: 56px;

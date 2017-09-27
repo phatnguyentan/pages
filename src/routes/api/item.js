@@ -74,9 +74,11 @@ router.post('/create', authen.auth, (req, res) => {
   let des = req.body.content.substring(0, 50);
   models.item.create({title: req.body.title,
     description: des,
+    title: req.body.title,
     userId: req.currentUser.id,
-    privacy: req.body.privacy,
-    content: content}).then(item => {
+    thumbnail: req.body.thumbnail,
+    content: content
+  }).then(item => {
     _c.res.send(res, item);
   });
 });
@@ -98,6 +100,7 @@ router.post('/update/:itemId', authen.auth, (req, res) => {
       item.updateAttributes({
         title: req.body.title,
         content: content,
+        thumbnail: req.body.thumbnail,
         description: des
       }).then(data => {
         _c.res.send(res, item);

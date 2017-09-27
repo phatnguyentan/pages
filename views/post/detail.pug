@@ -3,6 +3,10 @@ extends ../shared/templates/template1/index.pug
 block nav
   include ../shared/partials/header/nav.pug
 
+block append style
+  link(href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.6/css/froala_style.min.css" rel="stylesheet")
+
+
 block append scripts
   script.
     var content = "#{data.content}";
@@ -15,13 +19,12 @@ block content
   div(class="container")
     div(class="row")
       div(class="col-8")
+        div(class="lead")=data.user.username
+        small()=moment(data.createdAt).format('MM-DD-YYYY')
         h1(class="mt-4")=data.title
-        div(class="lead") by Name
         a(href=`/post/update/${data.id}` class="a-unstyle")
-          i(class="fa fa-pencil float-right") 
+          i(class="fa fa-pencil float-right")
         hr
-        p() Posted on January 1, 2017 at 12:00 PM
-        hr
-        div(id="post-content")
+        div(id="post-content" class="fr-view")
         hr
     

@@ -11,6 +11,7 @@ router.get('/:username', cAuthen.auth, (req, res) => {
   _c.api.call(`/api/v1/item/user-list/${req.currentUser.id}`, {token: req.userToken, user: req.currentUser}, (r) => {
     for(let i = 0; i < r.data.length; i++) {
       r.data[i].description = htmlencode.htmlDecode(r.data[i].description);
+      r.data[i].content = "";
     }
     res.render('user/profile', { title: 'User Profile', data: r.data, user: req.currentUser})
   })

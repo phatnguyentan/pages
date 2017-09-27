@@ -25,15 +25,21 @@ script.
     if (Common().getUrlId() !== "create") {
       Api().get(`/api/v1/item/detail/${Common().getUrlId()}`, {}, function(event) {
         $("#title").val(event.data.title);
-        $('#editor').froalaEditor('html.insert', event.data.content, true);
+        $('#editor').froalaEditor('html.set', event.data.content, true);
         $('#post').val(event.data.id);
+        //- console.log($('img')[0].currentSrc);
       })
     }
     
     var update = function(id, callback) {
+      var link = null;
+      if ($('img')[0]) {
+        link = $('img')[0].currentSrc
+      }
       Api().post(`/api/v1/item/update/${id}`, {
           content: $('#editor').froalaEditor('html.get', true),
-          title: $('#title').val()
+          title: $('#title').val(),
+          thumbnail: link
         }, function(event) {
           callback(event);
       });
@@ -53,17 +59,22 @@ script.
           $("#save").text("Save")
         })
       } else {
+        var link = null;
+        if ($('img')[0]) {
+          link = $('img')[0].currentSrc
+        }
         create({
           content: $('#editor').froalaEditor('html.get', true),
-          title: $('#title').val()
+          title: $('#title').val(),
+          thumbnail: link
         }, function(event) {
           $("#save").text("Save");
           $('#post').val(event.data.id);
         });
       }
     };
-    var saveFuncDebounce = $.debounce(1000, saveFunc);
-    $('#editor').on('froalaEditor.keypress', saveFuncDebounce);
-    $('#title').keypress(saveFuncDebounce);
+    setInterval(function(){ 
+      saveFunc();
+    }, 2500);
     $('#save').click(saveFunc);
   });

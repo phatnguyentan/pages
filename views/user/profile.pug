@@ -17,7 +17,8 @@ block content
         div(class="col-4 portfolio-item")
           div(class="card h-100")
             a(class="a-unstyle" href=`/post/detail/${val.id}`)
-              img(class="card-img-top" src="http://placehold.it/700x400" alt="")
+              div(class="thumnail-container col-12")
+                img(class="card-img-top" src=`${val.thumbnail}` alt="")
               div(class="card-body")
                 h5(class="card-title")
                   h3(class="post-title")=val.title
