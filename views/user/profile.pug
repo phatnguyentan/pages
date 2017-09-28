@@ -4,11 +4,16 @@ block nav
   include ../shared/partials/header/nav.pug
 
 block content
-  div(class="container")
+  div(class="container ul-unstyle")
     header(class="jumbotron my-4")
       h1(class="display-3")=user.username
       p(class="lead") Lập Trình viên 5 năm kinh nghiệm
-  
+    ul()
+      li() 
+        a(href="latest") Bài mới nhất
+      each c in categories
+        li()
+          a(href=`${c.name}`)=c.name
   div(class="container")
     span(class="space-10")
     h1(class="post-title") Bài Viết

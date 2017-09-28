@@ -3,7 +3,7 @@ const config = require('../../../config/envs/config');
 const { StringDecoder } = require('string_decoder');
 
 module.exports = {
-  call: function(url, data, callback) {
+  get: function(url, data, callback) {
     var options = {
       host: config.api.host,
       path: url,

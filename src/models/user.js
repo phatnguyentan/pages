@@ -16,6 +16,7 @@ module.exports = function(sequelize, DataTypes) {
   });
   user.associate = function (models) {
    user.hasMany(models.session, {as: 'sessions'});
+   user.belongsToMany(models.category, {through: 'user_categories'});
    user.belongsToMany(models.page, {through: 'users_pages'});
    user.belongsToMany(models.tag, {through: 'users_tags'});
    user.hasMany(models.item);

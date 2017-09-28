@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
   });
   item.associate = function (models) {
    item.belongsToMany(models.page, {through: 'pages_items'});
+   item.belongsToMany(models.category, {through: 'category_items'});
    item.belongsTo(models.user);
    item.belongsToMany(models.tag, {through: 'items_tags'});
    item.hasMany(models.item_link, {as: "itemLinks"});

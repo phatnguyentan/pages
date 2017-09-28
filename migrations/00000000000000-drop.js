@@ -12,6 +12,7 @@ module.exports = {
     queryInterface.dropTable('tags');
     queryInterface.dropTable('items_tags');
     queryInterface.dropTable('item_links');
+    queryInterface.dropTable('categories');
   },
 
   down: function (queryInterface, Sequelize) {

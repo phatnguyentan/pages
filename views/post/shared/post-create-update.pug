@@ -1,4 +1,10 @@
 div(class="container")
+  div(class="dropdown")
+    select(class="selectpicker")
+      option() Chọn thể loại
+      each c in categories
+        option()=c.name
+
   div(class="space-10")
   input(id="title" class="textInput col-12" placeholder="Tiêu Đề")
   div(class="space-10")
@@ -27,7 +33,6 @@ script.
         $("#title").val(event.data.title);
         $('#editor').froalaEditor('html.set', event.data.content, true);
         $('#post').val(event.data.id);
-        //- console.log($('img')[0].currentSrc);
       })
     }
     

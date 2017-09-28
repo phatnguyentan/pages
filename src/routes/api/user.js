@@ -18,14 +18,15 @@ router.get('/list', authen.auth, (req, res) => {
 });
 
 /**
-@api {get} /api/v1/user/show Request User information
+@api {get} /api/v1/user/show/:username Request User information
 @apiName GetUser
 @apiGroup User
-@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
-@apiSampleRequest http://localhost:8000/api/v1/user/show
+@apiSampleRequest http://localhost:8000/api/v1/user/show/:username
 */
-router.get('/show', authen.auth, (req, res) => {
-  _c.res.send(res, req.currentUser);
+router.get('/show/:username', (req, res) => {
+  models.user.findOne({where: {username: req.params.username}}).then(user => {
+    _c.res.send(res, user);
+  });
 });
 
 

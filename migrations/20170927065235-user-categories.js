@@ -3,10 +3,11 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     queryInterface.createTable(
-      'categories',
+      'user_categories',
       {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-        name: Sequelize.STRING,
+        userId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
+        categoryId: {allowNull: false, type: Sequelize.INTEGER, foreignKey: true},
         createdAt: { allowNull: false, type: Sequelize.DATE },
         updatedAt: { allowNull: false, type: Sequelize.DATE }
       },

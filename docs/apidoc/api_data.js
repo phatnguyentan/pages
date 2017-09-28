@@ -1,8 +1,104 @@
 define({ "api": [
   {
     "type": "post",
+    "url": "/api/v1/category/user-create",
+    "title": "Create Category",
+    "name": "Create_Category",
+    "group": "Category",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "defaultValue": "portfolio",
+            "description": "<p>Mandatory type.</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
+            "description": "<p>Basic Access Authentication token.</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8000/api/v1/category/user-create"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/routes/api/category.js",
+    "groupTitle": "Category"
+  },
+  {
+    "type": "post",
+    "url": "/api/v1/category/user-delete",
+    "title": "Delete Category",
+    "name": "Delete_Category",
+    "group": "Category",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "categoryId",
+            "defaultValue": "1",
+            "description": "<p>Mandatory type.</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
+            "description": "<p>Basic Access Authentication token.</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8000/api/v1/category/user-delete"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/routes/api/category.js",
+    "groupTitle": "Category"
+  },
+  {
+    "type": "post",
+    "url": "/api/v1/file/upload",
+    "title": "Upload File",
+    "name": "Upload",
+    "group": "File",
+    "version": "0.0.0",
+    "filename": "src/routes/api/file.js",
+    "groupTitle": "File"
+  },
+  {
+    "type": "post",
     "url": "/api/v1/user/login",
-    "title": "Request User login",
+    "title": "User login",
     "name": "UserLogin",
     "group": "Guest",
     "parameter": {
@@ -184,7 +280,7 @@ define({ "api": [
     "groupTitle": "Item"
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/api/v1/item/detail/:itemId",
     "title": "Item Detail",
     "name": "Item_Detail",
@@ -206,6 +302,35 @@ define({ "api": [
     "sampleRequest": [
       {
         "url": "http://localhost:8000/api/v1/item/detail/1"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/routes/api/item.js",
+    "groupTitle": "Item"
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/item/user-list/:userId",
+    "title": "List Item By User",
+    "name": "List_Item",
+    "group": "Item",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=",
+            "description": "<p>Basic Access Authentication token.</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8000/api/v1/item/user-list/1?page=1&per=10"
       }
     ],
     "version": "0.0.0",

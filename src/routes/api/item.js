@@ -5,7 +5,6 @@ const models = require('../../models');
 const _c = require('../../core');
 const htmlencode = require('htmlencode');
 const striptags = require('striptags');
-const utf8 = require('utf8');
 
 /**
 @api {get} /api/v1/item/list/:pageId List Item By Page
@@ -27,26 +26,33 @@ router.get('/list/:pageId', authen.auth, (req, res, next) => {
 });
 
 /**
-@api {get} /api/v1/item/user-list/:userId List Item By User
+@api {get} /api/v1/item/user/:username List Item By User
 @apiName List Item
 @apiGroup Item
-@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
-@apiSampleRequest http://localhost:8000/api/v1/item/user-list/1?page=1&per=10
+@apiSampleRequest http://localhost:8000/api/v1/item/user/test?page=1&per=10
 */
-router.get('/user-list/:userId', authen.auth, (req, res, next) => {
-  req.currentUser.getItems(_c.req.paginate(req)).then(items => {
-    _c.res.send(res, items);
-  })
+router.get('/user/:username', (req, res, next) => {
+  models.user.findOne({where: {username: req.params.username}}).then(user => {
+    if (req.query.category) {
+      user.getItems({include: [{model: models.category, where: {name: req.query.category}}]}).then(data => {
+        _c.res.send(res, data);
+      })
+    } else {
+      user.getItems().then(data => {
+        _c.res.send(res, data);
+      })
+    }
+  });
 });
 
 /**
-@api {get} /api/v1/item/list-home List Item Home Page
+@api {get} /api/v1/item/home List Item Home Page
 @apiName List Item Home Page
 @apiGroup Item
 @apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
-@apiSampleRequest http://localhost:8000/api/v1/item/list-home
+@apiSampleRequest http://localhost:8000/api/v1/item/home
 */
-router.get('/list-home', authen.getUser, (req, res) => {
+router.get('/home', authen.getUser, (req, res) => {
   if (req.currentUser) {
     models.item.findAll(_c.req.paginate(req, {where : {$or: [{userId: req.currentUser.id}, {type: "system"} ]}})).then(items => {
       _c.res.send(res, items)
@@ -71,7 +77,7 @@ router.get('/list-home', authen.getUser, (req, res) => {
 router.post('/create', authen.auth, (req, res) => {
   // let content = htmlencode.htmlEncode(req.body.content)
   let content = req.body.content
-  let des = req.body.content.substring(0, 50);
+  let des = htmlencode.htmlEncode(striptags(req.body.content).substring(0, 100));
   models.item.create({title: req.body.title,
     description: des,
     title: req.body.title,
@@ -119,9 +125,6 @@ router.post('/update/:itemId', authen.auth, (req, res) => {
 @apiSampleRequest http://localhost:8000/api/v1/item/detail/1
 */
 router.get('/detail/:itemId', (req, res) => {
-  // req.currentUser.getItems({ where: { id: req.params.itemId }, include: [{model: models.tag}, {model: models.item_link, as: "itemLinks"}]}).then(item => {
-  //   _c.res.send(res, item[0]);
-  // });
   models.item.findOne({ where: { id: req.params.itemId }, include: [{model: models.tag}, {model: models.user}]}).then(item => {
     _c.res.send(res, item);
   })

@@ -8,6 +8,6 @@ exports.auth = (req, res, next) => {
     req.userToken = session.token;
     next();
   } else {
-    next();
+    res.redirect(`/user/login`);
   }
 };
