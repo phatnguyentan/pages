@@ -1,9 +1,9 @@
 div(class="container")
   div(class="dropdown")
-    select(class="selectpicker")
-      option() Chọn thể loại
+    select(id="category" class="selectpicker")
+      option(value="0") Chọn thể loại
       each c in categories
-        option()=c.name
+        option(value=`${c.id}`)=c.name
 
   div(class="space-10")
   input(id="title" class="textInput col-12" placeholder="Tiêu Đề")
@@ -44,7 +44,8 @@ script.
       Api().post(`/api/v1/item/update/${id}`, {
           content: $('#editor').froalaEditor('html.get', true),
           title: $('#title').val(),
-          thumbnail: link
+          thumbnail: link,
+          categoryId: $('#category').val()
         }, function(event) {
           callback(event);
       });

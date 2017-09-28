@@ -4,7 +4,7 @@ const querystring = require('querystring');
 module.exports = {
   send: function(res, data) {
     let body = {status: 'success', data: data}
-    if (res.req.pagination) {
+    if (res.req && res.req.pagination) {
       body.pagination = buildPagination(res.req, data)
     }
     res.json(body)

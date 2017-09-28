@@ -98,8 +98,7 @@ router.post('/create', authen.auth, (req, res) => {
 @apiSampleRequest http://localhost:8000/api/v1/item/update/1
 */
 router.post('/update/:itemId', authen.auth, (req, res) => {
-  models.item.findOne({ where: { id: req.params.itemId }}).then(item => {
-    // let content = htmlencode.htmlEncode(req.body.content);
+  models.item.findOne({ where: { id: req.params.itemId }, include: [{model: models.category}]}).then(item => {
     let content = req.body.content;
     let des = htmlencode.htmlEncode(striptags(req.body.content).substring(0, 100));
     if (item) {
@@ -109,8 +108,27 @@ router.post('/update/:itemId', authen.auth, (req, res) => {
         thumbnail: req.body.thumbnail,
         description: des
       }).then(data => {
-        _c.res.send(res, item);
-      })
+
+      });
+      if (req.body.categoryId != 0) {
+        models.category.findById(req.body.categoryId).then(r => {
+          if(item.categories.length == 0 && r) {
+            item.addCategory(r).then(r => {
+              _c.res.send(res, item);
+            });
+          } else if (r) {
+            item.setCategories(r).then(r => {
+              _c.res.send(res, item);
+            })
+          } else {
+            _c.res.send(res, item);
+          }
+        })
+      } else {
+        item.setCategories([]).then(r => {
+          _c.res.send(res, item);
+        })
+      }
     } else {
       _c.res.send(res, item);
     }
