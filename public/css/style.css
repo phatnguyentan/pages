@@ -17,6 +17,14 @@ p {
  list-style: none;
 }
 
+.li-menu li {
+  display: inline;
+  padding: 6px !important;
+}
+
+.can-click {
+  cursor:pointer;
+}
 .space-10 {
   margin: 10px;
 }

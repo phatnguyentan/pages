@@ -4,7 +4,7 @@ block nav
   include ../shared/partials/header/nav.pug
 
 block content
-  div(class="container ul-unstyle")
+  div(class="container ul-unstyle li-menu")
     header(class="jumbotron my-4")
       h1(class="display-3")=user.username
       p(class="lead") Lập Trình viên 5 năm kinh nghiệm
@@ -14,7 +14,7 @@ block content
       each c in categories
         li()
           a(href=`${c.name}`)=c.name
-  div(class="container")
+  div(class="container ul-unstyle li-menu")
     span(class="space-10")
     h1(class="post-title") Bài Viết
     div(class="row")
@@ -28,8 +28,31 @@ block content
                 h5(class="card-title")
                   h3(class="post-title")=val.title
                   p(class="card-text")=val.description
-            a(href=`/post/update/${val.id}` class="a-unstyle")
-              i(class="fa fa-pencil float-right") 
+            span(class="space-10")
+            ul(class="text-right")
+              li
+                a(href=`/post/update/${val.id}` class="a-unstyle")
+                  i(class="fa fa-pencil")
+              li(class="deletePost can-click" postId=`${val.id}`)
+                i(class="fa fa-trash" )
     span(class="space-10")
 
+block append scripts
+  script.
+    $(document).ready(function() {
+      $('.deletePost').click(function(event) {
+        $.confirm({
+            title: 'Xóa Bài',
+            content: 'Bạn muốn xóa bài?',
+            buttons: {
+                xóa: function () {
+                    console.log('Confirmed!', event.currentTarget.attributes.postId.value);
+                },
+                hủy: function () {
+                  
+                }
+            }
+        });
+      })
+    });
   

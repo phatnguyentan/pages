@@ -34,11 +34,11 @@ router.get('/list/:pageId', authen.auth, (req, res, next) => {
 router.get('/user/:username', (req, res, next) => {
   models.user.findOne({where: {username: req.params.username}}).then(user => {
     if (req.query.category) {
-      user.getItems({include: [{model: models.category, where: {name: req.query.category}}]}).then(data => {
+      user.getItems({include: [{model: models.category, where: {name: req.query.category}}], order: [['updatedAt', 'DESC']]}).then(data => {
         _c.res.send(res, data);
       })
     } else {
-      user.getItems().then(data => {
+      user.getItems({order: [['updatedAt', 'DESC']]}).then(data => {
         _c.res.send(res, data);
       })
     }
