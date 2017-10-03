@@ -149,6 +149,24 @@ router.get('/detail/:itemId', (req, res) => {
 });
 
 /**
+@api {post} /api/v1/item/delete/:itemId Item Delete
+@apiName Item Delete
+@apiGroup Item
+@apiHeader {String} Authorization ="Basic dGVzdDokMmEkMDQkMWN1UTZnVklLY3o3cmNPbkUuVzc5ZWJxaTRvRkpDUm95L0k2RUl1aXpHYkg3a1R3UzFZdlM=" Basic Access Authentication token.
+@apiSampleRequest http://localhost:8000/api/v1/item/delete/1
+*/
+router.post('/delete/:itemId', (req, res) => {
+  models.item.findOne({ where: { id: req.params.itemId }, include: [{model: models.category}]}).then(item => {
+    item.setCategories([]).then(r => {
+      let tmp = item;
+      item.destroy().then(item => {
+        _c.res.send(res, tmp);
+      });
+    });
+  })
+});
+
+/**
 @api {post} /api/v1/item/add-page Add to Page
 @apiName Add to Page
 @apiGroup Item

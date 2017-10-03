@@ -14,12 +14,17 @@ block content
       each c in categories
         li()
           a(href=`${c.name}`)=c.name
+    div(class="dropdown")
+      button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Tutorials
+      div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+        a(class="dropdown-item" href="#") HTML
+
   div(class="container ul-unstyle li-menu")
     span(class="space-10")
     h1(class="post-title") Bài Viết
     div(class="row")
       each val in data
-        div(class="col-4 portfolio-item")
+        div(class="col-4 portfolio-item" id=`post-${val.id}`)
           div(class="card h-100")
             a(class="a-unstyle" href=`/post/detail/${val.id}`)
               div(class="thumnail-container col-12")
@@ -46,7 +51,9 @@ block append scripts
             content: 'Bạn muốn xóa bài?',
             buttons: {
                 xóa: function () {
-                    console.log('Confirmed!', event.currentTarget.attributes.postId.value);
+                    Api().post('/api/v1/item/delete/' + event.currentTarget.attributes.postId.value, {}, function(event) {
+                        $('#post-' + event.data.id).hide();
+                    });
                 },
                 hủy: function () {
                   

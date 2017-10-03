@@ -1,4 +1,4 @@
-pm2 start bin/www.js --watch && pm2 logs www
-DEBUG=pages:debug node bin/www.js
-pm2 start bin/www.js && pm2 logs www
+pm2 start bin/www --watch && pm2 logs www
+DEBUG=pages:debug node bin/www
+pm2 start bin/www && pm2 logs www
 pm2 stop all

@@ -37,6 +37,7 @@ script.
     }
     
     var update = function(id, callback) {
+      $("#save").text("Saving");
       var link = null;
       if ($('img')[0]) {
         link = $('img')[0].currentSrc
@@ -52,14 +53,16 @@ script.
     }
     
     var create = function(data, callback) {
-      Api().post('/api/v1/item/create', data, function(event) {
-        callback(event);
-      });
+      $("#save").text("Saving");
+      if (data.content != "") {
+        Api().post('/api/v1/item/create', data, function(event) {
+          callback(event);
+        });
+      }
     }
     
     var saveFunc = function (e, editor, keypressEvent) {
       var id = $('#post').val();
-      $("#save").text("Saving");
       if (id) {
         update(id, function(event) {
           $("#save").text("Save")
