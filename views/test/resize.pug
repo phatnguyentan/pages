@@ -1,0 +1,114 @@
+extends ../shared/templates/template1/index.pug
+
+block nav
+  include ../shared/partials/header/nav.pug
+
+block content
+  include ./resize.html
+  script. 
+    $(document).ready(function() {
+      var border = $("#box-border");
+      var img = $(".image-inline")[0];
+      var handle = $(".select-box-handle");
+      $(".image-inline").click((event) => {
+        $(".select-box").show();
+        $(".select-box-border").css({left: img.offsetLeft, top: img.offsetTop, height: img.height, width: img.width});
+        tick();
+      });
+      function tick() {
+        $(handle[0]).css({left: border.position().left - 5, top: border.position().top -5});
+        $(handle[1]).css({left: border.position().left + border.width() - 5, top: border.position().top - 5});
+        $(handle[2]).css({left: border.position().left + border.width() - 5, top: border.position().top + border.height() - 5});
+        $(handle[3]).css({left: border.position().left - 5, top: border.position().top + border.height() - 5});
+        $(handle[4]).css({left: border.position().left + border.width()/2 - 5, top: border.position().top - 5});
+        $(handle[5]).css({left: border.position().left + border.width() - 5, top: border.position().top + border.height()/2 - 5});
+        $(handle[6]).css({left: border.position().left + border.width()/2 - 5, top: border.position().top + border.height() - 5});
+        $(handle[7]).css({left: border.position().left - 5, top: border.position().top + border.height()/2 - 5});
+      }
+      function changeSize() {
+        $(".image-inline").css({left: $("#box-border").position().left, top: $("#box-border").position().top, position:'absolute', width: $("#box-border").width(), height: $("#box-border").height()});
+        change = false;
+      }
+      var timeInterval = 0;
+      var currentX = 0;
+      var currentY = 0;
+      var change = false;
+      var minBorderBox = 20;
+      
+      $($(".select-box-handle")).on('mousedown', (e) => {
+        var func = function() {
+          var deltaX = x - currentX;
+          var deltaY = y - currentY;
+          var rate = deltaX*img.height/img.width;
+          if( Math.abs(deltaX) + Math.abs(deltaY) > 10) {
+            if(e.currentTarget.id == 'nw-handle') {
+              //- var rate = deltaX*img.height/img.width;
+              if (img.width - deltaX > minBorderBox && img.height - rate > minBorderBox)
+              $(".select-box-border").css({left: x, top: img.offsetTop + rate, width: img.width - deltaX, height: img.height - rate});
+            }
+            if(e.currentTarget.id == 'n-handle') {
+              if (img.height - deltaY > minBorderBox)
+              $(".select-box-border").css({top: y, height: img.height - deltaY});
+            }
+            if(e.currentTarget.id == 'ne-handle') {
+              //- var rate = deltaX*img.height/img.width;
+              if (img.width + deltaX > minBorderBox && img.height + rate > minBorderBox)
+              $(".select-box-border").css({right: x, top: img.offsetTop - rate, width: img.width + deltaX, height: img.height + rate});
+            }
+            if(e.currentTarget.id == 'e-handle') {
+              if (img.width + deltaX > minBorderBox)
+              $(".select-box-border").css({right: x, width: img.width + deltaX});
+            }
+            if(e.currentTarget.id == 'se-handle') {
+              if (img.width + deltaX > minBorderBox && img.height + rate > minBorderBox)
+              $(".select-box-border").css({width: img.width + deltaX, height: img.height + rate});
+            }
+            if(e.currentTarget.id == 's-handle') {
+              if (img.height + deltaY > minBorderBox)
+              $(".select-box-border").css({height: img.height + deltaY});
+            }
+            if(e.currentTarget.id == 'sw-handle') {
+              if (img.width - deltaX > minBorderBox && img.height - rate > minBorderBox)
+              $(".select-box-border").css({left: x, width: img.width - deltaX, height: img.height - rate});
+            }
+            if(e.currentTarget.id == 'w-handle') {
+              if (img.width - deltaX > minBorderBox)
+              $(".select-box-border").css({left: x, width: img.width - deltaX});
+            }
+            tick();
+            change = true;
+          }
+        }
+        timeInterval = setInterval(func, 3);
+        currentX = x;
+        currentY = y;
+      });
+
+      document.documentElement.addEventListener('mouseup', function(e){
+          var str = "Mouse up";
+          clearInterval(timeInterval);
+          if(change) changeSize();
+          if (!$(img).is(e.target) && $(img).has(e.target).length === 0) 
+          {
+              $(".select-box").hide();
+          }
+      }); 
+
+      var x = null;
+      var y = null;
+      document.addEventListener('mousemove', onMouseUpdate, false);
+      function onMouseUpdate(e) {
+          x = e.pageX;
+          y = e.pageY;
+      }
+      function getMouseX() {
+          return x;
+      }
+      function getMouseY() {
+          return y;
+      }
+      
+    });
+    
+
+  
